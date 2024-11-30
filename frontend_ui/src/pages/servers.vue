@@ -3,12 +3,16 @@ import {computed, ref} from 'vue';
 import {useLoaderStore} from '@/stores/loaderStore';
 import CommonEmptyStateCard from '@/components/CommonEmptyStateCard.vue';
 import serverEmptyIcon from '@/assets/icons/server_empty.svg';
-
+import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 
 const loaderStore = useLoaderStore();
 const items = ref([]);
+const ipDialogVisible = ref(false);
 
-// Simulate fetching data
+const openDialog = () => {
+  ipDialogVisible.value = true;
+};
+
 async function fetchData() {
   try {
     loaderStore.showLoader('Fetching data...');
@@ -23,7 +27,24 @@ async function fetchData() {
 }
 
 function handleButtonClick() {
-  console.log('Add Item button clicked!');
+  openDialog();
+}
+
+function handleIpSave(ipArray) {
+
+  loaderStore.showLoader('Saving data...');
+
+  const formattedIps = ipArray.map((ip) => ({ serverIp: ip }));
+
+  botManagerRepository.saveIpAddress(formattedIps)
+    .then(() => {
+      loaderStore.hideLoader();
+      console.log('IP addresses saved successfully!');
+    })
+    .catch((error) => {
+      loaderStore.hideLoader();
+      console.error('Error saving IP addresses:', error);
+    });
 }
 
 fetchData();
@@ -31,6 +52,11 @@ fetchData();
 
 <template>
   <v-container class="d-flex flex-column align-center justify-center" fluid>
+
+    <IpInputDialog
+      @update:ipDialogVisible="ipDialogVisible = $event"
+      :ip-dialog-visible="ipDialogVisible"
+      @save="handleIpSave" />
 
 
     <!-- Show empty state if no data -->
