@@ -38,7 +38,7 @@ import GlobalLoader from "@/components/GlobalLoader.vue";
 .layout-container {
   display: flex;
   padding: 24px;
-  max-width: calc(100vw -  510px); /* Subtract the width of the drawers */
+  max-width: calc(100vw -  485px); /* Subtract the width of the drawers */
 }
 
 .center-content {
