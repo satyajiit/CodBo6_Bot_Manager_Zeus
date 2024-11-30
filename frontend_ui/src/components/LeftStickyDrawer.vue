@@ -1,12 +1,8 @@
 <script setup>
-
-//initialise left drawer options to an array with icon, title and route
-const leftDrawerOptions = [
-  { icon: 'mdi-view-dashboard', title: 'Dashboard', route: '/' },
-  { icon: 'mdi-account-box', title: 'Servers', route: '/account' },
-  { icon: 'mdi-gavel', title: 'GamePad', route: '/admin' }
-]
-
+import appConfig from '@/constants/appConfig.json';
+function openYT() {
+  window.open('https://www.youtube.com/@GamesPatch', '_blank');
+}
 </script>
 
 <template>
@@ -15,11 +11,12 @@ const leftDrawerOptions = [
     elevation="2"
     permanent
   >
-    <v-list color="transparent">
+    <v-list>
       <v-list-item
-        v-for="option in leftDrawerOptions"
+        v-for="option in appConfig.leftDrawerOptions"
         :key="option.title"
         :to="option.route"
+        active-color="primary"
         :prepend-icon="option.icon"
         :title="option.title"
       ></v-list-item>
@@ -27,9 +24,12 @@ const leftDrawerOptions = [
 
     <template v-slot:append>
       <div class="pa-2">
-        <v-btn block>
-          Logout
-        </v-btn>
+        <v-card @click="openYT" elevation="2" rounded color="secondary" class="pa-3">
+          <p class="text-sm-center">
+            Made with ❤️ from GamesPatch
+          </p>
+
+        </v-card>
       </div>
     </template>
   </v-navigation-drawer>

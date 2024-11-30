@@ -1,1 +1,6 @@
 #REQUIREMENTS
+
+Flask
+PySide6
+PyQtWebEngine
+

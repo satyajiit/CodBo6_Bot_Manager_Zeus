@@ -1,3 +1,21 @@
 {
-  "appName": "Zeus Manager"
+    "appName": "Zeus Manager",
+    "backendUrl": "http://127.0.0.1:5000",
+    "leftDrawerOptions": [
+        {
+            "icon": "mdi-view-dashboard",
+            "title": "Dashboard",
+            "route": "/"
+        },
+        {
+            "icon": "mdi-account-box",
+            "title": "Servers",
+            "route": "/servers"
+        },
+        {
+            "icon": "mdi-gavel",
+            "title": "GamePad",
+            "route": "/gamepad"
+        }
+    ]
 }
