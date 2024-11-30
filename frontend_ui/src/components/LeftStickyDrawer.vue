@@ -54,7 +54,7 @@ function changeServer(index) {
           {{ selectedServer }}
 
           <v-menu activator="parent">
-            <v-list height="300">
+            <v-list style="height: max-content">
               <v-list-item
                 v-for="(item, index) in allServers"
                 :key="index"

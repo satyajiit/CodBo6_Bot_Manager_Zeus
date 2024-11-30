@@ -88,15 +88,18 @@ onUnmounted(() => {
     <div style="background-color: black">
       <v-list height="400" class="overflow-y-auto code-font">
         <v-list-item v-for="(log, index) in logs" :key="index">
-          <v-list-item-title style="color: white" class="font-weight-bold">{{ log.cmdName }}</v-list-item-title>
-          <v-list-item-subtitle style="color: white">{{ new Date(log.timestamp).toLocaleString() }}</v-list-item-subtitle>
-          <v-list-item-subtitle style="color: white">{{ log.message }}</v-list-item-subtitle>
+          <v-list-item-title class="font-weight-bold list-text">{{ log.cmdName }}</v-list-item-title>
+          <v-list-item-subtitle class="list-text">{{ new Date(log.timestamp).toLocaleString() }}</v-list-item-subtitle>
+          <v-list-item-subtitle class="list-text">{{ log.message }}</v-list-item-subtitle>
         </v-list-item>
       </v-list>
     </div>
   </v-navigation-drawer>
 </template>
 
-<style scoped lang="sass">
-
+<style scoped>
+.list-text {
+  color: white;
+  font-size: 13px;
+}
 </style>
