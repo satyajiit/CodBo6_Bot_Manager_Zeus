@@ -12,7 +12,7 @@ from backend.app import create_app
 # Constants
 FRONTEND_DIR = os.path.join(os.getcwd(), "frontend_ui")
 APP_CONFIG_PATH = os.path.join(FRONTEND_DIR, "src", "constants", "appConfig.json")
-BACKEND_PORT = 5000
+BACKEND_PORT = 6000
 FRONTEND_PORT = 4173
 ALLOWED_USER_AGENT = "PySide6-WebEngine"  # Restrict to PySide6
 

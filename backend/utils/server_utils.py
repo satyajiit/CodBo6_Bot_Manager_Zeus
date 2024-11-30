@@ -1,16 +1,18 @@
 import configparser
 import os
 
+from backend.database import get_db_connection
+
 CONFIG_FILE_PATH = os.path.join(os.getcwd(), "config", "servers.in")
 
-def read_server_ips():
-    config = configparser.ConfigParser(allow_no_value=True)
-    config.read(CONFIG_FILE_PATH)
+def fetch_server_ips():
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
-    # Check if the "Servers" section exists
-    if "Servers" in config:
-        # Retrieve all keys (IPs) from the "Servers" section
-        server_ips = set(config.options("Servers"))
-        return server_ips
-    else:
-        return set()
+    # Fetch all IPs from the database
+    cursor.execute("SELECT ip_address FROM servers")
+    servers = [row[0] for row in cursor.fetchall()]
+
+    conn.close()
+
+    return servers

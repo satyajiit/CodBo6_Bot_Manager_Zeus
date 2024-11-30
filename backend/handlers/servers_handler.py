@@ -2,6 +2,7 @@ import sqlite3
 from flask import request
 from backend.database import get_db_connection
 from backend.utils.response_helper import create_response, ResponseType
+from backend.utils.server_utils import fetch_server_ips
 
 
 def get_servers():
@@ -44,3 +45,26 @@ def add_servers():
     conn.close()
 
     return create_response(ResponseType.SUCCESS, "Servers updated successfully", {"added": added_servers})
+
+def check_server_health():
+    """Handler for /checkServerHealth endpoint."""
+    server_ips = fetch_server_ips()
+
+    servers_status = []
+    for server_ip in server_ips:
+        server_status = {
+            "server_ip": server_ip,
+            "status": "unknown"
+        }
+
+        # Use the dummy health check method
+        health_status = "ok"
+
+        if health_status == "ok":
+            server_status["status"] = "healthy"
+        else:
+            server_status["status"] = "unhealthy"
+
+        servers_status.append(server_status)
+
+    return create_response(ResponseType.SUCCESS, "Server Health", {"server_status": servers_status})
