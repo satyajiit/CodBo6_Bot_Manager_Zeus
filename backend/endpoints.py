@@ -1,4 +1,6 @@
-from backend.handlers.servers_handler import get_servers, add_servers
+from backend.handlers.misc_utils import open_url_browser
+from backend.handlers.servers_handler import get_servers, add_servers, check_server_health
+
 
 def register_routes(app):
     app.add_url_rule("/getServers", view_func=get_servers, methods=["GET"])
