@@ -5,6 +5,7 @@
       <v-row justify="space-between" align="center" class="mb-6">
         <v-btn
           outlined
+          size="small"
           class="button l-button"
           @click="handleButtonClick('L')"
         >
@@ -12,6 +13,7 @@
         </v-btn>
         <v-btn
           outlined
+          size="small"
           class="button r-button"
           @click="handleButtonClick('R')"
         >
@@ -19,79 +21,101 @@
         </v-btn>
       </v-row>
 
-      <v-row>
-        <!-- Left: D-Pad -->
-        <v-col cols="1" offset="2">
-          <div class="buttons-grid">
+
+      <div class="d-flex flex-row align-center justify-space-between pt-6">
+        <v-row style="max-width: 250px">
+          <v-col cols="4">
+          </v-col>
+          <v-col cols="4">
             <v-btn
               outlined
+              size="small"
               class="button"
               @click="handleButtonClick('Up')"
             >
-              Up
+              <v-icon
+                icon="mdi-arrow-up-bold"
+                size="large"
+              ></v-icon>
             </v-btn>
-              <v-btn
-                outlined
-                class="button"
-                @click="handleButtonClick('Left')"
-              >
-                Left
-              </v-btn>
-              <v-btn
-                outlined
-                class="button"
-                @click="handleButtonClick('Right')"
-              >
-                Right
-              </v-btn>
+          </v-col>
+          <v-col cols="4">
+          </v-col>
+          <v-col cols="4">
+            <v-btn
+              outlined
+              size="small"
+              class="button"
+              @click="handleButtonClick('Left')"
+            >
+              <v-icon
+                icon="mdi-arrow-left-bold"
+                size="large"
+              ></v-icon>
+            </v-btn>
+          </v-col>
+          <v-col cols="4">
             <v-btn
               outlined
               class="button"
+              size="small"
               @click="handleButtonClick('Down')"
             >
-              Down
+              <v-icon
+                icon="mdi-arrow-down-bold"
+                size="large"
+              ></v-icon>
             </v-btn>
-          </div>
-        </v-col>
-
-        <!-- Right: Y, X, A, B Buttons -->
-        <v-col cols="1" offset="4">
-          <div class="buttons-grid">
+          </v-col>
+          <v-col cols="4">
             <v-btn
               outlined
-              class="button y-button"
-              color="yellow darken-2"
-              @click="handleButtonClick('Y')"
+              size="small"
+              class="button"
+              @click="handleButtonClick('Right')"
             >
-              Y
+              <v-icon
+                icon="mdi-arrow-right-bold"
+                size="large"
+              ></v-icon>
             </v-btn>
-            <v-btn
-              outlined
-              class="button x-button"
-              color="blue darken-2"
-              @click="handleButtonClick('X')"
-            >
-              X
-            </v-btn>
-            <v-btn
-              outlined
-              class="button a-button"
-              color="green darken-2"
-              @click="handleButtonClick('A')"
-            >
-              A
-            </v-btn>
-            <v-btn
-              outlined
-              class="button b-button"
-              color="red darken-2"
-              @click="handleButtonClick('B')"
-            >
-              B
-            </v-btn>
-          </div>
-        </v-col>
-      </v-row>
+          </v-col>
+        </v-row>
+        <div class="buttons-grid">
+          <v-btn
+            outlined
+            class="button y-button"
+            color="yellow darken-2"
+            @click="handleButtonClick('Y')"
+          >
+            Y
+          </v-btn>
+          <v-btn
+            outlined
+            class="button x-button"
+            color="blue darken-2"
+            @click="handleButtonClick('X')"
+          >
+            X
+          </v-btn>
+          <v-btn
+            outlined
+            class="button a-button"
+            color="green darken-2"
+            @click="handleButtonClick('A')"
+          >
+            A
+          </v-btn>
+          <v-btn
+            outlined
+            class="button b-button"
+            color="red darken-2"
+            @click="handleButtonClick('B')"
+          >
+            B
+          </v-btn>
+        </div>
+      </div>
     </v-card>
   </v-container>
 </template>
