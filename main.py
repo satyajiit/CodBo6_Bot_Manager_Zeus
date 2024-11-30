@@ -4,6 +4,8 @@ import sys
 import json
 import socket
 from threading import Thread
+
+
 from flask import Flask
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
 from PySide6.QtWebEngineWidgets import QWebEngineView
@@ -86,14 +88,14 @@ def start_frontend():
             except ValueError:
                 print(f"Error parsing port from line: {decoded_line}")
 
-
 class MainWindow(QMainWindow):
     def __init__(self, url):
         super().__init__()
         self.setWindowTitle("Zeus Manager Cod Bo6 Bot Lobby")
-        self.setFixedSize(1024, 768)  # Fixed tablet resolution
+        self.setFixedSize(1400, 768)  # Fixed tablet resolution
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl(url))
+
         layout = QVBoxLayout()
         layout.addWidget(self.browser)
         container = QWidget()
@@ -126,11 +128,11 @@ def main():
     import time
     time.sleep(3)
 
-    # Start the frontend
-    start_frontend()
-
     # Update the backend URL in the frontend config
     update_backend_url()
+
+    # Start the frontend
+    start_frontend()
 
     # Start the PySide6 application
     app = QApplication(sys.argv)
