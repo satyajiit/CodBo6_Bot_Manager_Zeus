@@ -1,5 +1,6 @@
 import configparser
 import os
+from backend.utils.server_utils import read_server_ips
 from flask import jsonify, request
 
 CONFIG_FILE_PATH = os.path.join(os.getcwd(), "config", "servers.in")
@@ -44,3 +45,40 @@ def add_servers():
         "message": "Servers updated successfully",
         "added": list(new_servers - existing_servers)
     }), 200
+
+def check_server_health():
+    """Handler for /checkServerHealth endpoint."""
+    config = configparser.ConfigParser(allow_no_value=True)
+    config.read(CONFIG_FILE_PATH)
+
+    server_ips = read_server_ips()
+    if not server_ips:
+        return jsonify({
+            "message": "Servers health report",
+            "servers": list()
+        }), 200
+
+    servers_status = []
+    for server_ip in server_ips:
+        server_status = {
+            "server_ip": server_ip,
+            "status": "unknown"
+        }
+
+        # Use the dummy health check method
+        health_status = "ok"
+
+        if health_status == "ok":
+            server_status["status"] = "healthy"
+        else:
+            server_status["status"] = "unhealthy"
+
+        servers_status.append(server_status)
+
+    return jsonify({
+        "message": "Servers health report",
+        "servers": servers_status
+    }), 200
+
+
+
