@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia';
+import appConfig from '@/constants/appConfig.json';
+
 
 export const useServerStore = defineStore('serverStore', {
   state: () => ({
@@ -21,7 +23,7 @@ export const useServerStore = defineStore('serverStore', {
   actions: {
     // Set the list of all servers with "All servers" at index 0
     setServerList(serverList) {
-      this.servers = [{ serverIp: 'All servers' }, ...serverList.filter(server => server.serverIp !== 'All servers')];
+      this.servers = [{ serverIp: appConfig.allServersText }, ...serverList.filter(server => server.serverIp !== 'All servers')];
     },
 
     // Set the currently selected server

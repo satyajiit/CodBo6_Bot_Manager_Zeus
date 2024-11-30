@@ -2,19 +2,36 @@ import sqlite3
 from flask import request
 from backend.database import get_db_connection
 from backend.utils.response_helper import create_response, ResponseType
-from backend.utils.server_utils import fetch_server_ips
+from backend.utils.server_utils import fetch_server_ips, verify_server_health
 
 
-def get_servers():
-    """Handler for /servers endpoint."""
+def delete_servers():
+    data = request.get_json()
+
+    if not data or not isinstance(data, list):
+        return create_response(ResponseType.ERROR, "Invalid payload", {})
+
+    servers_to_delete = {entry.get("serverIp") for entry in data if "serverIp" in entry}
+    if not servers_to_delete:
+        return create_response(ResponseType.ERROR, "No valid server IPs provided", {})
+
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Fetch all IPs from the database
-    cursor.execute("SELECT ip_address FROM servers")
-    servers = [{"serverIp": row[0]} for row in cursor.fetchall()]
+    # Delete the provided IPs
+    deleted_servers = []
+    for ip in servers_to_delete:
+        cursor.execute("DELETE FROM servers WHERE ip_address = ?", (ip,))
+        if cursor.rowcount > 0:
+            deleted_servers.append(ip)
 
+    conn.commit()
     conn.close()
+
+    return create_response(ResponseType.SUCCESS, "Server(s) deleted successfully!", {"deleted": deleted_servers})
+
+def get_servers():
+    servers = fetch_server_ips()
     return create_response(ResponseType.SUCCESS, "Servers fetched successfully", servers)
 
 
@@ -46,25 +63,30 @@ def add_servers():
 
     return create_response(ResponseType.SUCCESS, "Servers updated successfully", {"added": added_servers})
 
+
 def check_server_health():
-    """Handler for /checkServerHealth endpoint."""
-    server_ips = fetch_server_ips()
+    """
+    Check if a list of servers is reachable and return their health status.
+    """
+    # Extract data from the request
+    data = request.get_json()
 
-    servers_status = []
-    for server_ip in server_ips:
-        server_status = {
-            "server_ip": server_ip,
-            "status": "unknown"
-        }
+    # Validate the payload
+    if not isinstance(data, list):
+        return create_response(ResponseType.ERROR, "Invalid payload. Expected a list of servers.", {})
 
-        # Use the dummy health check method
-        health_status = "ok"
+    # Extract server IPs to check
+    servers_to_check = {entry.get("serverIp") for entry in data if "serverIp" in entry}
+    if not servers_to_check:
+        return create_response(ResponseType.ERROR, "No valid server IPs provided.", {})
 
-        if health_status == "ok":
-            server_status["status"] = "healthy"
-        else:
-            server_status["status"] = "unhealthy"
+    # Verify health of each server
+    servers_status_with_reason = [
+        {"serverIp": ip, "status": status, "reason": reason}
+        for ip in servers_to_check
+        for status, reason in [verify_server_health(ip)]
+    ]
 
-        servers_status.append(server_status)
-
-    return create_response(ResponseType.SUCCESS, "Server Health", {"server_status": servers_status})
+    # Prepare the response
+    response = {"serversList": servers_status_with_reason}
+    return create_response(ResponseType.SUCCESS, "Server health checked successfully.", response)

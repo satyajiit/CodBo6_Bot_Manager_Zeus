@@ -1,38 +1,70 @@
 <script setup>
-import {ref, onMounted, onUnmounted, computed} from "vue";
+import { ref, onMounted, onUnmounted, computed, watch } from "vue";
 import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 import { toast } from "vue3-toastify";
-import { useLoggerStore} from "@/stores/loggerStore.js";
+import { useLoggerStore } from "@/stores/loggerStore.js";
 import EmptyStateIcon from "@/assets/icons/database-storage.svg";
-const loggerStore = useLoggerStore(); // Access your store
-const serverHealth = ref({ data: {} });
+import { useServerStore } from "@/stores/serverStore.js";
+import appConfig from "@/constants/appConfig.json";
+
+const loggerStore = useLoggerStore();
+const serverStore = useServerStore();
 const intervalId = ref(null);
+const healthList = ref([]); // Initialize as an empty array for reactivity
+const allServersList = computed(() => serverStore.getAllServers);
 const logs = computed(() => loggerStore.getLogs);
 
 // Fetch health data
 const fetchHealthData = async () => {
+
   try {
-    serverHealth.value = await botManagerRepository.fetchServerHealth();
-  } catch (err) {
-    toast.error(err.message);
+    // Filter out the "all" entry from server list
+    const formattedIps = allServersList.value.filter(
+      (server) => server.serverIp !== appConfig.allServersText
+    );
+
+    // Skip if no valid IPs
+    if (formattedIps.length === 0) {
+      healthList.value = [];
+      return;
+    }
+
+    // Fetch server health
+    const response = await botManagerRepository.fetchServerHealth(formattedIps);
+    if (response?.data?.serversList?.length > 0) {
+      healthList.value = response.data.serversList;
+    } else {
+      healthList.value = []; // Clear the list if no data returned
+    }
+  } catch (error) {
+    console.error("Error fetching server health:", error);
+    toast.error(error.message || "Failed to fetch server health.");
+    healthList.value = []; // Clear the list on error
   }
 };
 
-onMounted(() => {
-  // Fetch initial data when mounted
-  fetchHealthData();
+watch(
+  () => allServersList.value,
+  () => {
+    fetchHealthData();
+  },
+  { deep: true, immediate: false }
+);
 
-  // Set interval to update every 15 seconds
-  intervalId.value = setInterval(fetchHealthData, 15000);
+onMounted(() => {
+  fetchHealthData();
+  intervalId.value = setInterval(fetchHealthData, appConfig.healthCheckIntervalSeconds * 1000);
 });
 
 onUnmounted(() => {
-  // Clear the interval when the component is unmounted
+  // Clear the interval on unmount
   if (intervalId.value) {
     clearInterval(intervalId.value);
   }
 });
 </script>
+
+
 
 <template>
   <v-navigation-drawer
@@ -44,10 +76,10 @@ onUnmounted(() => {
     <div class="pa-4">
       <h4>Server Health</h4>
     </div>
-    <v-divider/>
-    <v-list v-if="serverHealth && Object.keys(serverHealth.data).length > 0" height="200" class="overflow-y-auto">
-      <v-list-item v-for="(serverHealth, index) in serverHealth.data.server_status" :key="index">
-        <v-list-item-title class="font-weight-bold">{{ serverHealth.server_ip }}</v-list-item-title>
+    <v-divider />
+    <v-list v-if="healthList.length > 0" height="200" class="overflow-y-auto">
+      <v-list-item v-for="(serverHealth, index) in healthList" :key="index">
+        <v-list-item-title class="font-weight-bold">{{ serverHealth.serverIp }}</v-list-item-title>
         <template #append>
           <div v-if="serverHealth.status === 'healthy'" class="d-flex ga-2 align-center">
             <p>Healthy</p>
@@ -74,11 +106,11 @@ onUnmounted(() => {
       <v-card flat>
         <v-card-text class="d-flex align-center justify-center flex-column text-center">
           <v-img class="mb-2" height="50" width="50" :src="EmptyStateIcon"></v-img>
-          Servers that are online will appear here
+          Status of all your added servers would show here!
         </v-card-text>
       </v-card>
     </div>
-    <v-divider/>
+    <v-divider />
 
     <!-- Logs Section -->
     <div class="pa-4">
@@ -96,7 +128,6 @@ onUnmounted(() => {
     </div>
   </v-navigation-drawer>
 </template>
-
 <style scoped>
 .list-text {
   color: white;

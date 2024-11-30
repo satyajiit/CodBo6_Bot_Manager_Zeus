@@ -16,7 +16,7 @@ export async function withLogging(cmdName, requestMessage, apiCall) {
   try {
     const response = await apiCall();
 
-    if (response.data.status === "NOT-OK") throw "NOT-OK"
+    if (response.data.status === "NOT-OK") throw response.data
     // Log the response
     const responseMessage = `Status: ${response.data.status}, Message: ${response.data.message}`;
     loggerStore.addLog(`${cmdName} - response`, responseMessage);

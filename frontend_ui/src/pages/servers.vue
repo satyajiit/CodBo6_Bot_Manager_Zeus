@@ -6,6 +6,7 @@ import serverEmptyIcon from '@/assets/icons/server_empty.svg';
 import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 import {toast} from "vue3-toastify";
 import {useServerStore} from "@/stores/serverStore.js";
+import {el} from "vuetify/locale";
 const serverStore = useServerStore();
 
 const loaderStore = useLoaderStore();
@@ -25,6 +26,8 @@ async function fetchData() {
         items.value = resp.data;
         if (resp.data.length > 0)
           serverStore.setServerList(resp.data);
+        else
+          serverStore.setServerList([]);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -50,11 +53,28 @@ function handleIpSave(ipArray) {
     .then((resp) => {
       loaderStore.hideLoader();
       toast.success(resp.message);
+      fetchData()
     })
     .catch((error) => {
       loaderStore.hideLoader();
       toast.error(error.message);
     });
+}
+
+function deleteServer(ipAddress) {
+  loaderStore.showLoader('Deleting server...');
+  botManagerRepository.deleteServer([{ serverIp: ipAddress }])
+    .then((resp) => {
+      loaderStore.hideLoader();
+      toast.success(resp.message);
+      fetchData()
+    })
+    .catch((error) => {
+      loaderStore.hideLoader();
+      console.log(error);
+      toast.error(error.message);
+    });
+
 }
 
 fetchData();
@@ -92,7 +112,7 @@ fetchData();
             <v-list-item-title class="text-start font-weight-bold">{{ server.serverIp }}</v-list-item-title>
           </template>
           <template #append>
-            <v-btn icon variant="flat"><v-icon color="red">mdi-trash-can</v-icon></v-btn>
+            <v-btn @click="deleteServer(server.serverIp)" icon variant="flat"><v-icon color="red">mdi-trash-can</v-icon></v-btn>
           </template>
         </v-card>
       </v-list-item>

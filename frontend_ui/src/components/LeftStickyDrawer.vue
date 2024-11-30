@@ -46,7 +46,6 @@ function changeServer(index) {
     <template #append>
       <div class="pl-2 pr-2" v-if="allServers.length > 0">
         <v-btn
-          @click="changeServer"
           variant="tonal"
           block
           color="primary"
