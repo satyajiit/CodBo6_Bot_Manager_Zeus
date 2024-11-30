@@ -1,19 +1,20 @@
 {
-    "appName": "Zeus Manager",
+    "appName": "Zeus Cod Bo6 Bot Lobby Manager",
     "backendUrl": "http://127.0.0.1:5000",
+    "authKey": "xdertHHY",
     "leftDrawerOptions": [
         {
-            "icon": "mdi-view-dashboard",
+            "icon": "mdi-chart-box",
             "title": "Dashboard",
             "route": "/"
         },
         {
-            "icon": "mdi-account-box",
+            "icon": "mdi-server",
             "title": "Servers",
             "route": "/servers"
         },
         {
-            "icon": "mdi-gavel",
+            "icon": "mdi-controller",
             "title": "GamePad",
             "route": "/gamepad"
         }

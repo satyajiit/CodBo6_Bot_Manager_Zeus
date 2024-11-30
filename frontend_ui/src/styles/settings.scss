@@ -1,10 +1,8 @@
-/**
- * src/styles/settings.scss
- *
- * Configures SASS variables and Vuetify overwrites
- */
+$font-family:'Poppins';
 
-// https://vuetifyjs.com/features/sass-variables/`
-// @use 'vuetify/settings' with (
-//   $color-pack: false
-// );
+.v-application {
+  [class*='text-'] {
+    font-family: $font-family, sans-serif !important;
+  }
+  font-family: $font-family, sans-serif !important;
+}
