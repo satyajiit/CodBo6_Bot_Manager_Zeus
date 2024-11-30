@@ -5,7 +5,6 @@
       <v-row justify="space-between" align="center" class="mb-6">
         <v-btn
           outlined
-          size="small"
           class="button l-button"
           @click="handleButtonClick('L')"
         >
@@ -13,7 +12,6 @@
         </v-btn>
         <v-btn
           outlined
-          size="small"
           class="button r-button"
           @click="handleButtonClick('R')"
         >
@@ -23,13 +21,12 @@
 
 
       <div class="d-flex flex-row align-center justify-space-between pt-6">
-        <v-row style="max-width: 250px">
+        <v-row dense style="max-width: 250px">
           <v-col cols="4">
           </v-col>
           <v-col cols="4">
             <v-btn
               outlined
-              size="small"
               class="button"
               @click="handleButtonClick('Up')"
             >
@@ -44,7 +41,6 @@
           <v-col cols="4">
             <v-btn
               outlined
-              size="small"
               class="button"
               @click="handleButtonClick('Left')"
             >
@@ -58,7 +54,6 @@
             <v-btn
               outlined
               class="button"
-              size="small"
               @click="handleButtonClick('Down')"
             >
               <v-icon
@@ -70,7 +65,6 @@
           <v-col cols="4">
             <v-btn
               outlined
-              size="small"
               class="button"
               @click="handleButtonClick('Right')"
             >
@@ -160,7 +154,7 @@ function handleButtonClick(button) {
 .buttons-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 12px;
   justify-items: center;
 }
 
