@@ -4,13 +4,9 @@ import ControllerComponent from "@/components/ControllerComponent.vue";
 </script>
 
 <template>
-
   <VContainer>
-
-    <ControllerComponent/>
-
+    <ControllerComponent />
   </VContainer>
-
 </template>
 
 <style scoped lang="sass">
