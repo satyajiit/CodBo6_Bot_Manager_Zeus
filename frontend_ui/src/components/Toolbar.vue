@@ -1,13 +1,23 @@
 <script setup>
 import appConfig from '@/constants/appConfig.json';
 import bo6Logo from '@/assets/icons/bo6.png';
+import github from '@/assets/icons/github.svg';
 </script>
 
 <template>
   <v-app-bar :elevation="2" rounded>
     <v-container class="d-flex justify-between align-center" fluid>
       <!-- Invisible Spacer to Balance Text and Center the Logo -->
-      <div class="invisible-spacer"></div>
+
+      <div class="logo-github ml-6">
+        <v-btn block variant="tonal"  color="#5865f2"
+               autocapitalize="off"  style="text-transform: none">
+          <v-img :src="github" height="30" width="30" class="mr-2" />
+          Star on GitHub
+        </v-btn>
+      </div>
+
+      <div class="invisible-spacer ml-n16"></div>
 
       <!-- Centered Logo -->
       <div class="logo-container">
@@ -16,10 +26,14 @@ import bo6Logo from '@/assets/icons/bo6.png';
 
       <!-- Text on the Right -->
       <div class="text-container d-flex justify-end align-center">
-        <span class="font-weight-medium text-subtitle-2 text-teal-darken-4">
+        <span class="text-teal-darken-4" style="font-size: small">
           {{ appConfig.appName }}
         </span>
       </div>
+
+
+
+
     </v-container>
   </v-app-bar>
 </template>
@@ -32,6 +46,14 @@ import bo6Logo from '@/assets/icons/bo6.png';
 
 /* Centered Logo */
 .logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px; /* Explicit width for the logo container */
+  height: 60px; /* Explicit height for the logo container */
+}
+
+.logo-github {
   display: flex;
   justify-content: center;
   align-items: center;
