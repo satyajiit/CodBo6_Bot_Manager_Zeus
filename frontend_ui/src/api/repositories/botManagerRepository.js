@@ -22,6 +22,16 @@ const BotManagerRepository = {
     );
   },
 
+  fetchServerHealth() {
+    const cmdName = '/checkServerHealth';
+    const requestMessage = 'Checking health of servers';
+
+    //withLogging to handle API call and logging
+    return withLogging(cmdName, requestMessage, () =>
+      axiosInstance.get(cmdName)
+    );
+  },
+
   deleteServer(data) {
     const cmdName = '/deleteServer';
     const requestMessage = 'Deleting server IP from the database...';
