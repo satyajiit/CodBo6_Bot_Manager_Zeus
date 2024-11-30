@@ -5,6 +5,7 @@
       <v-row justify="space-between" align="center" class="mb-6">
         <v-btn
           outlined
+          size="small"
           class="button l-button"
           @click="handleButtonClick('L')"
         >
@@ -12,6 +13,7 @@
         </v-btn>
         <v-btn
           outlined
+          size="small"
           class="button r-button"
           @click="handleButtonClick('R')"
         >
@@ -27,6 +29,7 @@
           <v-col cols="4">
             <v-btn
               outlined
+              size="small"
               class="button"
               @click="handleButtonClick('Up')"
             >
@@ -41,6 +44,7 @@
           <v-col cols="4">
             <v-btn
               outlined
+              size="small"
               class="button"
               @click="handleButtonClick('Left')"
             >
@@ -54,6 +58,7 @@
             <v-btn
               outlined
               class="button"
+              size="small"
               @click="handleButtonClick('Down')"
             >
               <v-icon
@@ -65,6 +70,7 @@
           <v-col cols="4">
             <v-btn
               outlined
+              size="small"
               class="button"
               @click="handleButtonClick('Right')"
             >
@@ -110,87 +116,6 @@
           </v-btn>
         </div>
       </div>
-<!--      <v-row>-->
-<!--        &lt;!&ndash; Left: D-Pad &ndash;&gt;-->
-<!--        <v-col cols="6" offset="2">-->
-<!--          <v-row>-->
-<!--            <v-col cols="12">-->
-<!--              <v-btn-->
-<!--                outlined-->
-<!--                class="button"-->
-<!--                @click="handleButtonClick('Up')"-->
-<!--              >-->
-<!--                Up-->
-<!--              </v-btn>-->
-<!--            </v-col>-->
-<!--            <v-col cols="4">-->
-<!--              <v-btn-->
-<!--                outlined-->
-<!--                class="button"-->
-<!--                @click="handleButtonClick('Left')"-->
-<!--              >-->
-<!--                Left-->
-<!--              </v-btn>-->
-<!--            </v-col>-->
-<!--            <v-col cols="4">-->
-<!--              <v-btn-->
-<!--                outlined-->
-<!--                class="button"-->
-<!--                @click="handleButtonClick('Right')"-->
-<!--              >-->
-<!--                Right-->
-<!--              </v-btn>-->
-<!--            </v-col>-->
-<!--            <v-col cols="4">-->
-<!--              <v-btn-->
-<!--              outlined-->
-<!--              class="button"-->
-<!--              @click="handleButtonClick('Down')"-->
-<!--            >-->
-<!--              Down-->
-<!--            </v-btn>-->
-<!--            </v-col>-->
-<!--          </v-row>-->
-<!--        </v-col>-->
-
-<!--        &lt;!&ndash; Right: Y, X, A, B Buttons &ndash;&gt;-->
-<!--        <v-col cols="6" offset="4">-->
-<!--          <div class="buttons-grid">-->
-<!--            <v-btn-->
-<!--              outlined-->
-<!--              class="button y-button"-->
-<!--              color="yellow darken-2"-->
-<!--              @click="handleButtonClick('Y')"-->
-<!--            >-->
-<!--              Y-->
-<!--            </v-btn>-->
-<!--            <v-btn-->
-<!--              outlined-->
-<!--              class="button x-button"-->
-<!--              color="blue darken-2"-->
-<!--              @click="handleButtonClick('X')"-->
-<!--            >-->
-<!--              X-->
-<!--            </v-btn>-->
-<!--            <v-btn-->
-<!--              outlined-->
-<!--              class="button a-button"-->
-<!--              color="green darken-2"-->
-<!--              @click="handleButtonClick('A')"-->
-<!--            >-->
-<!--              A-->
-<!--            </v-btn>-->
-<!--            <v-btn-->
-<!--              outlined-->
-<!--              class="button b-button"-->
-<!--              color="red darken-2"-->
-<!--              @click="handleButtonClick('B')"-->
-<!--            >-->
-<!--              B-->
-<!--            </v-btn>-->
-<!--          </div>-->
-<!--        </v-col>-->
-<!--      </v-row>-->
     </v-card>
   </v-container>
 </template>
