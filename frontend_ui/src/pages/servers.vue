@@ -5,6 +5,8 @@ import CommonEmptyStateCard from '@/components/CommonEmptyStateCard.vue';
 import serverEmptyIcon from '@/assets/icons/server_empty.svg';
 import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 import {toast} from "vue3-toastify";
+import {useServerStore} from "@/stores/serverStore.js";
+const serverStore = useServerStore();
 
 const loaderStore = useLoaderStore();
 const items = ref([]);
@@ -20,6 +22,8 @@ async function fetchData() {
     botManagerRepository.fetchServers()
       .then((resp) => {
         items.value = resp.data;
+        if (resp.data.length > 0)
+          serverStore.setServerList(resp.data);
       })
       .catch((error) => {
         toast.error(error.message);

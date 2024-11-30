@@ -32,6 +32,34 @@ import RightStickyDrawer from "@/components/RightStickyDrawer.vue";
 import LeftStickyDrawer from "@/components/LeftStickyDrawer.vue";
 import Toolbar from "@/components/Toolbar.vue";
 import GlobalLoader from "@/components/GlobalLoader.vue";
+import botManagerRepository from "@/api/repositories/botManagerRepository.js";
+import {toast} from "vue3-toastify";
+import {useLoaderStore} from "@/stores/loaderStore.js";
+import {useServerStore} from "@/stores/serverStore.js";
+const loaderStore = useLoaderStore();
+const serverStore = useServerStore();
+
+
+function fetchAllServers() {
+  try {
+    loaderStore.showLoader('Fetching servers list...');
+    botManagerRepository.fetchServers()
+      .then((resp) => {
+        if (resp.data.length > 0)
+        serverStore.setServerList(resp.data);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  } catch (error) {
+    toast.error(error.message);
+  } finally {
+    loaderStore.hideLoader();
+  }
+}
+
+fetchAllServers()
+
 </script>
 
 <style scoped>

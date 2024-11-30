@@ -2,34 +2,27 @@
 import appConfig from '@/constants/appConfig.json';
 import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 import {toast} from "vue3-toastify";
+import { computed } from 'vue';
+import { useServerStore } from '@/stores/serverStore';
+
+
 function openYT() {
   botManagerRepository.openUrlOnBrowser({
-    targetUrl: "https://www.youtube.com/@GamesPatch"
+    targetUrl: appConfig.ytChannelUrl
   }).then(() => {
   }).catch((error) => {
     toast.error(error.message);
   });
 }
-
-const items = [
-  { title: 'All' },
-  { title: 'Server 1' },
-  { title: 'Server 2' },
-  { title: 'Server 3' },
-  { title: 'Server 4' },
-  { title: 'Server 5' },
-  { title: 'Server 6' },
-  { title: 'Server 7' },
-  { title: 'Server 8' },
-  { title: 'Server 9' },
-  { title: 'Server 10' },
-];
-
-let serverButtonText = 'Select server';
+const serverStore = useServerStore();
+const selectedServer = computed(() => serverStore.getCurrentlySelected);
+const allServers = computed(() => serverStore.getAllServers);
 
 function changeServer(index) {
-  serverButtonText = items[index].title;
+  const serverIp = allServers.value[index].serverIp;
+  serverStore.setCurrentlySelected(serverIp);
 }
+
 
 </script>
 
@@ -51,24 +44,24 @@ function changeServer(index) {
     </v-list>
 
     <template #append>
-      <div class="pl-2 pr-2">
+      <div class="pl-2 pr-2" v-if="allServers.length > 0">
         <v-btn
           @click="changeServer"
           variant="tonal"
           block
           color="primary"
         >
-          {{ serverButtonText }}
+          {{ selectedServer }}
 
           <v-menu activator="parent">
             <v-list height="300">
               <v-list-item
-                v-for="(item, index) in items"
+                v-for="(item, index) in allServers"
                 :key="index"
                 :value="index"
                 @click="changeServer(index)"
               >
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
+                <v-list-item-title>{{ item.serverIp }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>

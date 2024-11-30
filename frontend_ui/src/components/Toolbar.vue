@@ -2,6 +2,18 @@
 import appConfig from '@/constants/appConfig.json';
 import bo6Logo from '@/assets/icons/bo6.png';
 import github from '@/assets/icons/github.svg';
+import botManagerRepository from "@/api/repositories/botManagerRepository.js";
+import {toast} from "vue3-toastify";
+
+function openGithub() {
+  botManagerRepository.openUrlOnBrowser({
+    targetUrl: appConfig.githubUrl
+  }).then(() => {
+  }).catch((error) => {
+    toast.error(error.message);
+  });
+}
+
 </script>
 
 <template>
@@ -16,6 +28,7 @@ import github from '@/assets/icons/github.svg';
         width="200"
         variant="tonal"
         color="black"
+        @click="openGithub"
         class="font-weight-regular"
         style="text-transform: none;"
       >
