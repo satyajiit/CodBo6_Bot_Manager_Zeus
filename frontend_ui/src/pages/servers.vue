@@ -17,11 +17,15 @@ const openDialog = () => {
 async function fetchData() {
   try {
     loaderStore.showLoader('Fetching data...');
-    items.value = await new Promise((resolve) =>
-      setTimeout(() => resolve([]), 2000)
-    );
+    botManagerRepository.fetchServers()
+      .then((resp) => {
+        items.value = resp.data;
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   } catch (error) {
-    console.error('Error fetching data:', error);
+    toast.error(error.message);
   } finally {
     loaderStore.hideLoader();
   }
@@ -44,7 +48,7 @@ function handleIpSave(ipArray) {
     })
     .catch((error) => {
       loaderStore.hideLoader();
-      toast.success(error.message);
+      toast.error(error.message);
     });
 }
 
