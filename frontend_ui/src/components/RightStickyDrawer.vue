@@ -79,9 +79,13 @@ onUnmounted(() => {
     <v-divider />
     <v-list v-if="healthList.length > 0" height="200" class="overflow-y-auto">
       <v-list-item v-for="(serverHealth, index) in healthList" :key="index">
-        <v-list-item-title class="font-weight-bold">{{ serverHealth.serverIp }}</v-list-item-title>
+        <v-tooltip :text=serverHealth.status>
+          <template v-slot:activator="{ props }">
+          <v-list-item-title v-bind="props" class="font-weight-bold">{{ serverHealth.serverIp }}</v-list-item-title>
+          </template>
+        </v-tooltip>
         <template #append>
-          <div v-if="serverHealth.status === 'healthy'" class="d-flex ga-2 align-center">
+          <div v-if="serverHealth.reason === 'OK'" class="d-flex ga-2 align-center">
             <p>Healthy</p>
             <v-icon
               color="#388E3C"
