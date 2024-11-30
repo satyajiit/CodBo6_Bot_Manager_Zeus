@@ -11,7 +11,7 @@ def create_app():
     init_db()
 
     # Allow CORS for the frontend
-    CORS(app, resources={r"/*": {"origins": r"http://localhost:\d+"}})
+    CORS(app, resources={r"/*": {"origins": [r"http://127.0.0.1:\d+", r"http://localhost:\d+"]}})
 
     register_routes(app)
     return app

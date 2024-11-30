@@ -3,7 +3,7 @@ import {ref, onMounted, onUnmounted, computed} from "vue";
 import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 import { toast } from "vue3-toastify";
 import { useLoggerStore} from "@/stores/loggerStore.js";
-
+import EmptyStateIcon from "@/assets/icons/database-storage.svg";
 const loggerStore = useLoggerStore(); // Access your store
 const serverHealth = ref({ data: {} });
 const intervalId = ref(null);
@@ -45,7 +45,7 @@ onUnmounted(() => {
       <h4>Server Health</h4>
     </div>
     <v-divider/>
-    <v-list height="300" class="overflow-y-auto">
+    <v-list v-if="serverHealth && Object.keys(serverHealth.data).length > 0" height="200" class="overflow-y-auto">
       <v-list-item v-for="(serverHealth, index) in serverHealth.data.server_status" :key="index">
         <v-list-item-title class="font-weight-bold">{{ serverHealth.server_ip }}</v-list-item-title>
         <template #append>
@@ -70,20 +70,30 @@ onUnmounted(() => {
         </template>
       </v-list-item>
     </v-list>
+    <div style="height: 200px" class="d-flex flex-row align-center justify-center" v-else>
+      <v-card flat>
+        <v-card-text class="d-flex align-center justify-center flex-column text-center">
+          <v-img class="mb-2" height="50" width="50" :src="EmptyStateIcon"></v-img>
+          Servers that are online will appear here
+        </v-card-text>
+      </v-card>
+    </div>
     <v-divider/>
 
     <!-- Logs Section -->
     <div class="pa-4">
       <h4>Logs</h4>
     </div>
-    <v-divider/>
-    <v-list height="300" class="overflow-y-auto">
-      <v-list-item v-for="(log, index) in logs" :key="index">
-        <v-list-item-title class="font-weight-bold">{{ log.cmdName }}</v-list-item-title>
-        <v-list-item-subtitle>{{ new Date(log.timestamp).toLocaleString() }}</v-list-item-subtitle>
-        <v-list-item-subtitle>{{ log.message }}</v-list-item-subtitle>
-      </v-list-item>
-    </v-list>
+    <v-divider />
+    <div style="background-color: black">
+      <v-list height="400" class="overflow-y-auto code-font">
+        <v-list-item v-for="(log, index) in logs" :key="index">
+          <v-list-item-title style="color: white" class="font-weight-bold">{{ log.cmdName }}</v-list-item-title>
+          <v-list-item-subtitle style="color: white">{{ new Date(log.timestamp).toLocaleString() }}</v-list-item-subtitle>
+          <v-list-item-subtitle style="color: white">{{ log.message }}</v-list-item-subtitle>
+        </v-list-item>
+      </v-list>
+    </div>
   </v-navigation-drawer>
 </template>
 

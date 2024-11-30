@@ -2,12 +2,13 @@
   <v-dialog :model-value="ipDialogVisible" @update:model-value="updateDialog" max-width="600px">
     <v-card>
       <v-card-title class="text-h6">Enter Server IP Addresses</v-card-title>
+      <VDivider />
 
       <v-card-text>
         <v-form ref="form">
           <v-container>
-            <v-row v-for="(ip, index) in ipFields" :key="index" align="center">
-              <v-col cols="10">
+            <div v-for="(ip, index) in ipFields" :key="index" class="row align-center">
+              <div class="col-10">
                 <v-text-field
                   v-model="ipFields[index]"
                   label="Server IP Address"
@@ -16,13 +17,14 @@
                   outlined
                   dense
                 />
-              </v-col>
-              <v-col cols="2" class="text-right">
+              </div>
+              <div class="col-2 text-right" style="margin-top: -22px; margin-left: 10px">
                 <v-btn icon @click="removeField(index)" v-if="ipFields.length > 1">
                   <v-icon>mdi-delete</v-icon>
                 </v-btn>
-              </v-col>
-            </v-row>
+              </div>
+            </div>
+
 
             <v-btn color="primary" text @click="addField">
               Add More IP
@@ -97,4 +99,18 @@ const updateDialog = (value) => {
 
 <style scoped>
 /* Add any additional styles if needed */
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.col-10 {
+  flex: 1;
+}
+
+.col-2 {
+  width: 10%;
+  text-align: right;
+}
 </style>

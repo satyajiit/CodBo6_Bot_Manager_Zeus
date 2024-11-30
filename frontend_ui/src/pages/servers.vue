@@ -16,6 +16,7 @@ const openDialog = () => {
   ipDialogVisible.value = true;
 };
 
+
 async function fetchData() {
   try {
     loaderStore.showLoader('Fetching data...');
@@ -60,7 +61,7 @@ fetchData();
 </script>
 
 <template>
-  <v-container class="d-flex flex-column align-center justify-center" fluid>
+  <v-container class="h-100" fluid>
 
     <IpInputDialog
       @update:ipDialogVisible="ipDialogVisible = $event"
@@ -69,35 +70,36 @@ fetchData();
 
 
     <!-- Show empty state if no data -->
-    <CommonEmptyStateCard
-      v-if="items.length === 0"
-      :imageSrc=serverEmptyIcon
-      mainText="No Servers/VMs Added"
-      subText="Start by adding a new server or virtual machine."
-      buttonText="Add Server"
-      buttonColor="secondary"
-      @button-click="handleButtonClick"
-    />
+    <div v-if="items.length === 0" class="d-flex flex-column align-center justify-center h-100 w-100 mt-4">
+      <CommonEmptyStateCard
+        :imageSrc=serverEmptyIcon
+        mainText="No Servers/VMs Added"
+        subText="Start by adding a new server or virtual machine."
+        buttonText="Add Server"
+        buttonColor="secondary"
+        @button-click="handleButtonClick"
+      />
+    </div>
 
     <!-- Show data when available -->
-    <div v-else>
-      <v-card
-        v-for="(item, index) in items"
+    <div class="mt-2" v-else>
+      <v-list-item
+        v-for="(server, index) in items"
         :key="index"
-        outlined
       >
-        <v-card-text>
-          <p>{{ item.serverIp }}</p>
-        </v-card-text>
-      </v-card>
+        <v-card rounded>
+          <template #title>
+            <v-list-item-title class="text-start font-weight-bold">{{ server.serverIp }}</v-list-item-title>
+          </template>
+          <template #append>
+            <v-btn icon variant="flat"><v-icon color="red">mdi-trash-can</v-icon></v-btn>
+          </template>
+        </v-card>
+      </v-list-item>
     </div>
   </v-container>
 </template>
 
 <style scoped>
-.v-container {
-  height: 100vh;
-  width: 100%;
-  text-align: center;
-}
+
 </style>

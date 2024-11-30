@@ -22,8 +22,27 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: '';
+    src: url('@/assets/fonts/Poppins-SemiBold.ttf') format('truetype'),
+    url('@/assets/fonts/Poppins-SemiBold.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cutive Mono';
+    src:  url('@/assets/fonts/CutiveMono-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+}
+
 
 body {
     font-family: 'Poppins', sans-serif !important;
+}
+
+.code-font {
+    font-family: 'Cutive Mono', monospace;
 }
 
