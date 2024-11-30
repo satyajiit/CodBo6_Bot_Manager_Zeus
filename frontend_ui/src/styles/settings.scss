@@ -1,5 +1,9 @@
 $font-family:'Poppins';
 
+:root {
+  --toastify-font-family: $font-family, sans-serif;
+}
+
 .v-application {
   [class*='text-'] {
     font-family: $font-family, sans-serif !important;
