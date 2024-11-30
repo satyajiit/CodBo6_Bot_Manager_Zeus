@@ -13,7 +13,6 @@ const logs = computed(() => loggerStore.getLogs);
 const fetchHealthData = async () => {
   try {
     serverHealth.value = await botManagerRepository.fetchServerHealth();
-    toast.info("Checking server health");
   } catch (err) {
     toast.error(err.message);
   }
