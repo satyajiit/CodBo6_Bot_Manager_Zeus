@@ -2,7 +2,7 @@ import sqlite3
 from flask import request
 from backend.database import get_db_connection
 from backend.utils.response_helper import create_response, ResponseType
-from backend.utils.server_utils import fetch_server_ips, verify_server_health
+from backend.utils.server_utils import fetch_server_ips, verify_server_health, check_all_servers_health
 
 
 def delete_servers():
@@ -75,17 +75,13 @@ def check_server_health():
     if not isinstance(data, list):
         return create_response(ResponseType.ERROR, "Invalid payload. Expected a list of servers.", {})
 
-    # Extract server IPs to check
+        # Extract server IPs to check
     servers_to_check = {entry.get("serverIp") for entry in data if "serverIp" in entry}
     if not servers_to_check:
         return create_response(ResponseType.ERROR, "No valid server IPs provided.", {})
 
-    # Verify health of each server
-    servers_status_with_reason = [
-        {"serverIp": ip, "status": status, "reason": reason}
-        for ip in servers_to_check
-        for status, reason in [verify_server_health(ip)]
-    ]
+    # Perform parallel health checks
+    servers_status_with_reason = check_all_servers_health(servers_to_check)
 
     # Prepare the response
     response = {"serversList": servers_status_with_reason}

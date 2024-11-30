@@ -6,11 +6,11 @@
       color="primary"
       fixed-tabs
     >
-      <v-tab text="Xbox Cloud">
+      <v-tab text="☁️ Xbox Cloud">
 
       </v-tab>
 
-      <v-tab text="In-Game">
+      <v-tab text="🎮 In-Game">
 
       </v-tab>
     </v-tabs>

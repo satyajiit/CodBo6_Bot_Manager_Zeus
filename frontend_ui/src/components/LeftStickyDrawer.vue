@@ -17,10 +17,21 @@ function openYT() {
 const serverStore = useServerStore();
 const selectedServer = computed(() => serverStore.getCurrentlySelected);
 const allServers = computed(() => serverStore.getAllServers);
+const deviceHwId = computed(() => serverStore.getDeviceHwId);
 
 function changeServer(index) {
   const serverIp = allServers.value[index].serverIp;
   serverStore.setCurrentlySelected(serverIp);
+}
+
+function copyToClipboard(text) {
+  botManagerRepository.copyToClipboard({
+    text: text
+  }).then(() => {
+    toast.success("Copied to clipboard!");
+  }).catch((error) => {
+    toast.error(error.message);
+  });
 }
 
 
@@ -65,6 +76,23 @@ function changeServer(index) {
             </v-list>
           </v-menu>
         </v-btn>
+      </div>
+      <div class="ml-2 pr-2 pt-2">
+        <v-tooltip :text=deviceHwId to>
+          <template v-slot:activator="{ props }">
+      <v-btn
+        class="me-2 text-none"
+        color="primary"
+        block
+        v-bind="props"
+        prepend-icon="mdi-content-copy"
+        variant="flat"
+        @click="copyToClipboard(deviceHwId)"
+      >
+        Copy HWID
+      </v-btn>
+          </template>
+        </v-tooltip>
       </div>
       <div class="pa-2">
         <v-card

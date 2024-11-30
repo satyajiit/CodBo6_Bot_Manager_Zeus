@@ -3,4 +3,5 @@ flask-cors
 Flask
 PySide6
 PyQtWebEngine
+pyperclip
 

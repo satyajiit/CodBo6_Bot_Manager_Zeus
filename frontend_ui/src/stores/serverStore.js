@@ -5,7 +5,8 @@ import appConfig from '@/constants/appConfig.json';
 export const useServerStore = defineStore('serverStore', {
   state: () => ({
     servers: [],
-    currentlySelected: 'All servers' // Default selected server
+    deviceHwId: '',
+    currentlySelected: appConfig.allServersText // Default selected server
   }),
 
   getters: {
@@ -17,6 +18,11 @@ export const useServerStore = defineStore('serverStore', {
     // Get the list of all servers
     getAllServers(state) {
       return state.servers;
+    },
+
+    // Get the device hardware ID
+    getDeviceHwId(state) {
+      return state.deviceHwId;
     }
   },
 
@@ -29,6 +35,11 @@ export const useServerStore = defineStore('serverStore', {
     // Set the currently selected server
     setCurrentlySelected(serverIp) {
       this.currentlySelected = serverIp;
+    },
+
+    // Set the device hardware ID
+    setDeviceHwId(deviceHwId) {
+      this.deviceHwId = deviceHwId;
     }
   }
 });

@@ -74,18 +74,18 @@ onUnmounted(() => {
   >
     <!-- Server Health Section -->
     <div class="pa-4">
-      <h4>Server Health</h4>
+      <h4>🖥️  Server Health</h4>
     </div>
     <v-divider />
     <v-list v-if="healthList.length > 0" height="200" class="overflow-y-auto">
       <v-list-item v-for="(serverHealth, index) in healthList" :key="index">
-        <v-tooltip :text=serverHealth.status>
+        <v-tooltip :text=serverHealth.reason>
           <template v-slot:activator="{ props }">
           <v-list-item-title v-bind="props" class="font-weight-bold">{{ serverHealth.serverIp }}</v-list-item-title>
           </template>
         </v-tooltip>
         <template #append>
-          <div v-if="serverHealth.reason === 'OK'" class="d-flex ga-2 align-center">
+          <div v-if="serverHealth.status === 'alive'" class="d-flex ga-2 align-center">
             <p>Healthy</p>
             <v-icon
               color="#388E3C"

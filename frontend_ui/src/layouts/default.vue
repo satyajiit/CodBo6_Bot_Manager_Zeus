@@ -39,6 +39,21 @@ import {useServerStore} from "@/stores/serverStore.js";
 const loaderStore = useLoaderStore();
 const serverStore = useServerStore();
 
+function fetchDeviceHwId() {
+  try {
+    botManagerRepository.getDeviceHwId()
+      .then((resp) => {
+        serverStore.setDeviceHwId(resp.data.hwid);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  } catch (error) {
+    toast.error(error.message);
+  } finally {
+    loaderStore.hideLoader();
+  }
+}
 
 function fetchAllServers() {
   try {
@@ -59,6 +74,7 @@ function fetchAllServers() {
 }
 
 fetchAllServers()
+fetchDeviceHwId()
 
 </script>
 

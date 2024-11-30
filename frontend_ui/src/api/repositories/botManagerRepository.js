@@ -41,6 +41,24 @@ const BotManagerRepository = {
     );
   },
 
+  getDeviceHwId() {
+    const cmdName = '/getDeviceHwId';
+    const requestMessage = 'Fetching device hardware ID...';
+
+    return withLogging(cmdName, requestMessage, () =>
+      axiosInstance.get(cmdName)
+    );
+  },
+
+  copyToClipboard(data) {
+    const cmdName = '/copyToClipboard';
+    const requestMessage = 'Copying text to clipboard...';
+
+    return withLogging(cmdName, requestMessage, () =>
+      axiosInstance.post(cmdName, data)
+    );
+  },
+
   fetchServers() {
     const cmdName = '/getServers';
     const requestMessage = 'Fetching server list from the database...';

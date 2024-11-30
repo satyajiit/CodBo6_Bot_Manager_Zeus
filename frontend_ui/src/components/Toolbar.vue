@@ -26,8 +26,7 @@ function openGithub() {
 
       <v-btn
         width="200"
-        variant="tonal"
-        color="black"
+        variant="flat"
         @click="openGithub"
         class="font-weight-regular"
         style="text-transform: none;"
