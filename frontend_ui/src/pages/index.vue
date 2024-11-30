@@ -36,7 +36,7 @@
               color="primary"
               v-model="inGameSwitch"
               class="pl-3"
-              :label="`Enable AFK in In-Game Server`"
+              :label="`Enable Movement AFK in in game`"
               hide-details
             ></v-switch>
           </v-list-item>
