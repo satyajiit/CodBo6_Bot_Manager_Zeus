@@ -84,7 +84,7 @@ fetchData();
         outlined
       >
         <v-card-text>
-          <p>{{ item.name }}</p>
+          <p>{{ item.serverIp }}</p>
         </v-card-text>
       </v-card>
     </div>
