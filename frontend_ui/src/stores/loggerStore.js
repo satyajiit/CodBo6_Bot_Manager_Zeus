@@ -18,5 +18,10 @@ export const useLoggerStore = defineStore('loggerStore', {
     clearLogs() {
       this.logs = [];
     }
+  },
+  getters: {
+    getLogs(state) {
+      return [...state.logs].sort((a, b) => b.timestamp - a.timestamp);
+    }
   }
 });
