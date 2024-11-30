@@ -2,6 +2,7 @@ import os
 import subprocess
 import sys
 import json
+import socket
 from threading import Thread
 from flask import Flask
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
@@ -12,14 +13,29 @@ from backend.app import create_app
 # Constants
 FRONTEND_DIR = os.path.join(os.getcwd(), "frontend_ui")
 APP_CONFIG_PATH = os.path.join(FRONTEND_DIR, "src", "constants", "appConfig.json")
-BACKEND_PORT = 6000
+BACKEND_PORT = 5000
 FRONTEND_PORT = 4173
 ALLOWED_USER_AGENT = "PySide6-WebEngine"  # Restrict to PySide6
 
 
-def update_backend_url():
+def is_port_available(port):
+    """Check if a port is available on the system."""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        result = s.connect_ex(('127.0.0.1', port))
+        return result != 0  # 0 means the port is in use
+
+
+def find_available_port(start_port):
+    """Find the next available port starting from the given port number."""
+    port = start_port
+    while not is_port_available(port):
+        port += 1
+    return port
+
+
+def update_backend_url(backend_port):
     """Update the backendUrl in frontend's appConfig.json."""
-    backend_url = f"http://127.0.0.1:{BACKEND_PORT}"
+    backend_url = f"http://127.0.0.1:{backend_port}"
     app_config = {}
 
     with open(APP_CONFIG_PATH, "r") as f:
@@ -33,14 +49,14 @@ def update_backend_url():
     print(f"Updated backendUrl in appConfig.json to {backend_url}")
 
 
-def start_backend():
+def start_backend(backend_port):
     """Start the Flask backend server."""
-    print("Starting Flask backend server...")
+    print(f"Starting Flask backend server on port {backend_port}...")
     app = create_app()
-    app.run(port=BACKEND_PORT, use_reloader=False)
+    app.run(port=backend_port, use_reloader=False)
 
 
-def start_frontend():
+def start_frontend(frontend_port):
     """Start the Vue.js frontend server."""
     print("Checking Vue.js frontend setup...")
 
@@ -70,23 +86,27 @@ class MainWindow(QMainWindow):
 
 
 def main():
+    # Find available ports for backend and frontend
+    available_backend_port = find_available_port(BACKEND_PORT)
+    available_frontend_port = find_available_port(FRONTEND_PORT)
+
+    # Update the backend URL in frontend config with the available backend port
+    update_backend_url(available_backend_port)
+
     # Start the backend first
-    backend_thread = Thread(target=start_backend, daemon=True)
+    backend_thread = Thread(target=start_backend, args=(available_backend_port,), daemon=True)
     backend_thread.start()
 
     # Wait a moment to ensure backend is ready
     import time
     time.sleep(3)
 
-    # Update the backend URL in the frontend config
-    update_backend_url()
-
     # Start the frontend
-    start_frontend()
+    start_frontend(available_frontend_port)
 
     # Start the PySide6 application
     app = QApplication(sys.argv)
-    window = MainWindow(f"http://localhost:{FRONTEND_PORT}")
+    window = MainWindow(f"http://localhost:{available_frontend_port}")
     window.show()
     sys.exit(app.exec_())
 
