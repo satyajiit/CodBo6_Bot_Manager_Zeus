@@ -1,5 +1,5 @@
 #REQUIREMENTS
-
+flask-cors
 Flask
 PySide6
 PyQtWebEngine
