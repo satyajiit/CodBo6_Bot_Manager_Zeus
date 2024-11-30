@@ -27,7 +27,11 @@ import github from '@/assets/icons/github.svg';
       <!-- Text on the Right -->
       <div class="text-container d-flex justify-end align-center">
         <span class="text-teal-darken-4" style="font-size: small">
-          {{ appConfig.appName }}
+          {{ appConfig.appName }} <v-badge
+          color="info"
+          :content=appConfig.appVersion
+          inline
+        ></v-badge>
         </span>
       </div>
 

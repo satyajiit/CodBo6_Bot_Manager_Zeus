@@ -1,5 +1,6 @@
 {
-    "appName": "Zeus Cod Bo6 Bot Lobby Manager v1.0.0",
+    "appName": "Zeus Cod Bo6 Bot Lobby Manager",
+    "appVersion": "v1.0.0",
     "backendUrl": "http://127.0.0.1:5000",
     "authKey": "xdertHHY",
     "leftDrawerOptions": [
