@@ -88,7 +88,9 @@ onUnmounted(() => {
     <div style="background-color: black">
       <v-list height="400" class="overflow-y-auto code-font">
         <v-list-item v-for="(log, index) in logs" :key="index">
-          <v-list-item-title class="font-weight-bold list-text">{{ log.cmdName }}</v-list-item-title>
+          <div class="list-text font-weight-bold">
+            {{ log.cmdName }}
+          </div>
           <v-list-item-subtitle class="list-text">{{ new Date(log.timestamp).toLocaleString() }}</v-list-item-subtitle>
           <v-list-item-subtitle class="list-text">{{ log.message }}</v-list-item-subtitle>
         </v-list-item>
