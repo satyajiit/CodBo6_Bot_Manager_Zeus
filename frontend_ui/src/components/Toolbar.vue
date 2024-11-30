@@ -5,69 +5,60 @@ import github from '@/assets/icons/github.svg';
 </script>
 
 <template>
-  <v-app-bar :elevation="2" rounded>
-    <v-container class="d-flex justify-between align-center" fluid>
+  <v-app-bar
+    :elevation="2"
+    rounded
+  >
+    <v-container class="d-flex flex-row align-center justify-space-between w-100" fluid>
       <!-- Invisible Spacer to Balance Text and Center the Logo -->
 
-      <div class="logo-github ml-6">
-        <v-btn block variant="tonal"  color="#5865f2"
-               autocapitalize="off"  style="text-transform: none">
-          <v-img :src="github" height="30" width="30" class="mr-2" />
-          Star on GitHub
-        </v-btn>
-      </div>
+      <v-btn
+        width="200"
+        variant="tonal"
+        color="#5865f2"
+        style="text-transform: none"
+      >
+        <v-img
+          :src="github"
+          height="20"
+          width="20"
+          class="mr-2"
+        />
+        Star on GitHub
+      </v-btn>
 
-      <div class="invisible-spacer ml-n16"></div>
+
 
       <!-- Centered Logo -->
       <div class="logo-container">
-        <v-img :src="bo6Logo" max-height="60" max-width="120" />
+        <v-img
+          :src="bo6Logo"
+          max-height="60"
+          max-width="120"
+        />
       </div>
 
       <!-- Text on the Right -->
-      <div class="text-container d-flex justify-end align-center">
-        <span class="text-teal-darken-4" style="font-size: small">
-          {{ appConfig.appName }} <v-badge
+      <span
+        class="text-teal-darken-4"
+        style="font-size: small"
+      >
+        {{ appConfig.appName }} <v-badge
           color="info"
-          :content=appConfig.appVersion
+          :content="appConfig.appVersion"
           inline
-        ></v-badge>
-        </span>
-      </div>
-
-
-
-
+        />
+      </span>
     </v-container>
   </v-app-bar>
 </template>
 
 <style scoped>
-/* Invisible Spacer to Balance Left Side */
-.invisible-spacer {
-  flex: 1;
-}
-
-/* Centered Logo */
 .logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px; /* Explicit width for the logo container */
-  height: 60px; /* Explicit height for the logo container */
-}
-
-.logo-github {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 120px; /* Explicit width for the logo container */
-  height: 60px; /* Explicit height for the logo container */
-}
-
-/* Right-Aligned Text */
-.text-container {
-  flex: 1;
-  text-align: right;
+  width: 120px;
+  height: 60px;
 }
 </style>
