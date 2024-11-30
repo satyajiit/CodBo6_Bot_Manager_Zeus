@@ -61,7 +61,7 @@ function changeServer(index) {
           {{ serverButtonText }}
 
           <v-menu activator="parent">
-            <v-list>
+            <v-list height="300">
               <v-list-item
                 v-for="(item, index) in items"
                 :key="index"
