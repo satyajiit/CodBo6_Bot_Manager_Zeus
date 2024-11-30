@@ -1,7 +1,14 @@
 <script setup>
 import appConfig from '@/constants/appConfig.json';
+import botManagerRepository from "@/api/repositories/botManagerRepository.js";
+import {toast} from "vue3-toastify";
 function openYT() {
-  window.open('https://www.youtube.com/@GamesPatch', '_blank');
+  botManagerRepository.openUrlOnBrowser({
+    targetUrl: "https://www.youtube.com/@GamesPatch"
+  }).then(() => {
+  }).catch((error) => {
+    toast.error(error.message);
+  });
 }
 
 const items = [

@@ -2,6 +2,16 @@ import axiosInstance from '@/api/axiosInstance';
 import { withLogging } from '@/utils/withLogging';
 
 const BotManagerRepository = {
+
+  openUrlOnBrowser(data) {
+    const cmdName = '/openUrlOnBrowser';
+    const requestMessage = 'Opening URL on the browser...';
+
+    return withLogging(cmdName, requestMessage, () =>
+      axiosInstance.post(cmdName, data)
+    );
+  },
+
   saveIpAddress(data) {
     const cmdName = '/addServers';
     const requestMessage = 'Adding server IP to the database...';

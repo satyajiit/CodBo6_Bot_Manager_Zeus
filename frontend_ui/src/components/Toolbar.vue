@@ -15,8 +15,9 @@ import github from '@/assets/icons/github.svg';
       <v-btn
         width="200"
         variant="tonal"
-        color="#5865f2"
-        style="text-transform: none"
+        color="black"
+        class="font-weight-regular"
+        style="text-transform: none;"
       >
         <v-img
           :src="github"

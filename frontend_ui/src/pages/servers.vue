@@ -80,7 +80,6 @@ fetchData();
       <v-card
         v-for="(item, index) in items"
         :key="index"
-        class="mb-2"
         outlined
       >
         <v-card-text>
