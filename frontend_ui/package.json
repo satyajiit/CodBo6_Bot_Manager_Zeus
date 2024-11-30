@@ -16,6 +16,7 @@
     "roboto-fontface": "*",
     "vue": "^3.4.31",
     "vue-axios": "^3.5.2",
+    "vue3-toastify": "^0.2.5",
     "vuetify": "^3.6.14"
   },
   "devDependencies": {

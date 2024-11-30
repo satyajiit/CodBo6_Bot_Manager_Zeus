@@ -1,9 +1,10 @@
 <script setup>
-import {computed, ref} from 'vue';
+import {ref} from 'vue';
 import {useLoaderStore} from '@/stores/loaderStore';
 import CommonEmptyStateCard from '@/components/CommonEmptyStateCard.vue';
 import serverEmptyIcon from '@/assets/icons/server_empty.svg';
 import botManagerRepository from "@/api/repositories/botManagerRepository.js";
+import {toast} from "vue3-toastify";
 
 const loaderStore = useLoaderStore();
 const items = ref([]);
@@ -37,13 +38,13 @@ function handleIpSave(ipArray) {
   const formattedIps = ipArray.map((ip) => ({ serverIp: ip }));
 
   botManagerRepository.saveIpAddress(formattedIps)
-    .then(() => {
+    .then((resp) => {
       loaderStore.hideLoader();
-      console.log('IP addresses saved successfully!');
+      toast.success(resp.message);
     })
     .catch((error) => {
       loaderStore.hideLoader();
-      console.error('Error saving IP addresses:', error);
+      toast.success(error.message);
     });
 }
 
