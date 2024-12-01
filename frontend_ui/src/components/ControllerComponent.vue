@@ -115,20 +115,36 @@
 import { useServerStore } from "@/stores/serverStore.js";
 import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 import appConfig from '@/constants/appConfig.json';
+import {computed} from "vue";
 
 const serverToSend = computed(() => serverStore.getCurrentlySelected)
+const allServersList = computed(() => serverStore.getAllServers);
 
 
 const serverStore = useServerStore()
 async function handleButtonClick(command) {
   console.log(`${command} clicked!`);
+  let serverList = []
   try {
+
+    const formattedIps = allServersList.value.filter(
+      (server) => server.serverIp !== appConfig.allServersText
+    );
+
+    // Skip if no valid IPs
+    if (formattedIps.length === 0) {
+      serverList = [];
+      return;
+    }
+
     const payload = {
       command: command,
     };
 
     if (serverToSend.value !== appConfig.allServersText) {
         payload.servers = [{ serverIp: serverToSend }]
+    } else {
+      payload.servers = formattedIps
     }
 
     const response = await botManagerRepository.sendCommandsToServers(payload);

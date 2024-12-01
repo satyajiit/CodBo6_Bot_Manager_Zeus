@@ -133,12 +133,12 @@ def send_commands_to_servers():
     # Send the command to each server
     server_port = 9999  # Default server port
     results = []
-    for server_ip in servers:
+    for server in servers:
         try:
-            response = call_server(server_ip, server_port, command)
-            results.append({"serverIp": server_ip, "status": "success", "response": response})
+            response = call_server(server["serverIp"], server_port, command)
+            results.append({"serverIp": server["serverIp"], "status": "success", "response": response})
         except Exception as e:
-            results.append({"serverIp": server_ip, "status": "error", "error": str(e)})
+            results.append({"serverIp": server["serverIp"], "status": "error", "error": str(e)})
 
     # Return the result
     return create_response(ResponseType.SUCCESS, "Command execution results.", {"results": results})
