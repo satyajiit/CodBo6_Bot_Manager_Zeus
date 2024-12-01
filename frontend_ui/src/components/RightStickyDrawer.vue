@@ -85,7 +85,7 @@ onUnmounted(() => {
           </template>
         </v-tooltip>
         <template #append>
-          <div v-if="serverHealth.status === 'alive'" class="d-flex ga-2 align-center">
+          <div v-if="serverHealth.status === 'healthy'" class="d-flex ga-2 align-center">
             <p>Healthy</p>
             <v-icon
               color="#388E3C"
