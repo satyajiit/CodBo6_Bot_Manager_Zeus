@@ -24,21 +24,38 @@ function openGithub() {
     <v-container class="d-flex flex-row align-center justify-space-between w-100" fluid>
       <!-- Invisible Spacer to Balance Text and Center the Logo -->
 
-      <v-btn
-        width="200"
-        variant="flat"
-        @click="openGithub"
-        class="font-weight-regular"
-        style="text-transform: none;"
-      >
-        <v-img
-          :src="github"
-          height="20"
-          width="20"
-          class="mr-2"
-        />
-        Star on GitHub
-      </v-btn>
+<!--      <v-btn-->
+<!--        width="200"-->
+<!--        variant="outlined"-->
+<!--        @click="openGithub"-->
+<!--        class="font-weight-regular"-->
+<!--        style="text-transform: none;"-->
+<!--      >-->
+<!--        <template #prepend>-->
+<!--          <div>-->
+<!--            <v-img-->
+<!--              :src="github"-->
+<!--              height="20"-->
+<!--              width="20"-->
+<!--              class="mr-2"-->
+<!--            />-->
+<!--          </div>-->
+<!--        </template>-->
+<!--        Star on GitHub-->
+<!--      </v-btn>-->
+
+      <div class="icon-button">
+        <div class="icon-avatr pa-2">
+          <v-img
+            :src="github"
+            height="20"
+            width="20"
+          />
+        </div>
+        <div class="ml-2 text-white pa-1 font-weight-medium">
+          Star on GitHub
+        </div>
+      </div>
 
 
 
@@ -73,5 +90,24 @@ function openGithub() {
   align-items: center;
   width: 120px;
   height: 60px;
+}
+
+.icon-button {
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  align-items: center;
+  justify-content: start;
+  border-radius: 4px;
+  background-color: #009688;
+}
+.icon-avatr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4DB6AC;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+
 }
 </style>

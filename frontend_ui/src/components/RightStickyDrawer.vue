@@ -62,6 +62,21 @@ onUnmounted(() => {
     clearInterval(intervalId.value);
   }
 });
+
+function getColorByStatus(status) {
+  const statusLower = status.toLowerCase();
+
+  if (statusLower.includes('error')) {
+    return "#EF5350";
+  } else if (statusLower.includes('ok')) {
+    return "#4CAF50";
+  } else {
+    return "#FFD54F";
+  }
+}
+
+
+
 </script>
 
 
@@ -79,8 +94,8 @@ onUnmounted(() => {
     <v-divider />
     <v-list v-if="healthList.length > 0" height="200" class="overflow-y-auto">
       <v-list-item v-for="(serverHealth, index) in healthList" :key="index">
-        <v-tooltip :text=serverHealth.reason>
-          <template v-slot:activator="{ props }">
+        <v-tooltip :text="serverHealth.reason">
+          <template #activator="{ props }">
           <v-list-item-title v-bind="props" class="font-weight-bold">{{ serverHealth.serverIp }}</v-list-item-title>
           </template>
         </v-tooltip>
@@ -127,8 +142,12 @@ onUnmounted(() => {
           <div class="list-text font-weight-bold">
             {{ log.cmdName }}
           </div>
-          <v-list-item-subtitle class="list-text">{{ new Date(log.timestamp).toLocaleString() }}</v-list-item-subtitle>
-          <v-list-item-subtitle class="list-text">{{ log.message }}</v-list-item-subtitle>
+          <div class="list-text">
+            {{ new Date(log.timestamp).toLocaleString() }}
+          </div>
+          <div :style="{ color: getColorByStatus(log.message) }" class="list-text">
+            {{ log.message }}
+          </div>
         </v-list-item>
       </v-list>
     </div>
