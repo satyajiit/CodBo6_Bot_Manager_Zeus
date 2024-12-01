@@ -90,7 +90,7 @@ fetchData();
 
 
     <!-- Show empty state if no data -->
-    <div v-if="items.length === 0" class="d-flex flex-column align-center justify-center h-100 w-100 mt-4">
+    <div v-if="items.length === 0" class="d-flex flex-column align-center justify-center w-100 mt-12" style="height: 600px">
       <CommonEmptyStateCard
         :imageSrc=serverEmptyIcon
         mainText="No Servers/VMs Added"
