@@ -102,6 +102,6 @@ const selectedServer = computed(() => serverStore.getCurrentlySelected);
 .bottom-info {
   position: absolute;
   bottom: 0;
-  padding-bottom: 12px
+  padding-bottom: 8px
 }
 </style>
