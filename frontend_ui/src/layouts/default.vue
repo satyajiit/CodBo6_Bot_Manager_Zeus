@@ -16,10 +16,17 @@
 
       <!-- Center Content -->
       <v-main
-        class="d-flex align-start justify-center ma-0 pa-0 layout-container"
+        class="d-flex align-start flex-column justify-center ma-0 pa-0 layout-container position-relative"
       >
         <router-view />
       </v-main>
+      <div v-if="!currentRoute.name.includes('server')" class="d-flex align-start justify-center w-100 layout-container bottom-info">
+        <v-alert
+          :text="`Changes will be applied to the selected server: ${selectedServer}`"
+          color="#42A5F5"
+          icon="mdi-information"
+        ></v-alert>
+      </div>
 
       <!-- Right Sticky Drawer -->
       <RightStickyDrawer />
@@ -36,6 +43,8 @@ import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 import {toast} from "vue3-toastify";
 import {useLoaderStore} from "@/stores/loaderStore.js";
 import {useServerStore} from "@/stores/serverStore.js";
+import {useRoute} from "vue-router";
+import {computed} from "vue";
 const loaderStore = useLoaderStore();
 const serverStore = useServerStore();
 
@@ -76,6 +85,11 @@ function fetchAllServers() {
 fetchAllServers()
 fetchDeviceHwId()
 
+const route = useRoute()
+const currentRoute = route
+
+const selectedServer = computed(() => serverStore.getCurrentlySelected);
+
 </script>
 
 <style scoped>
@@ -85,10 +99,9 @@ fetchDeviceHwId()
   max-width: calc(100vw -  485px); /* Subtract the width of the drawers */
 }
 
-.center-content {
-  flex: 1;
-  overflow-y: auto;
-  height: 100vh;
-  padding: 16px;
+.bottom-info {
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 12px
 }
 </style>
