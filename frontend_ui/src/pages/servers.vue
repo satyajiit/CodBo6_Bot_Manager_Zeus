@@ -116,6 +116,12 @@ fetchData();
           </template>
         </v-card>
       </v-list-item>
+
+      <div class="d-flex w-100 justify-end pa-4">
+        <v-btn color="primary" text @click="handleButtonClick">
+          <v-icon>mdi-plus</v-icon>Add More IP
+        </v-btn>
+      </div>
     </div>
   </v-container>
 </template>

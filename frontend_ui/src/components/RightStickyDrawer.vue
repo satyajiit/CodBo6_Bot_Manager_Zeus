@@ -121,7 +121,6 @@ function getColorByStatus(status) {
         </v-tooltip>
         <template #append>
           <div v-if="serverHealth.status === 'healthy'" class="d-flex ga-2 align-center">
-            <p>Healthy</p>
             <v-icon
               color="#388E3C"
               size="28px"
@@ -130,7 +129,6 @@ function getColorByStatus(status) {
             </v-icon>
           </div>
           <div class="d-flex ga-2" v-else>
-            <p>Unhealthy</p>
             <v-icon
               color="#E53935"
               size="28px"
