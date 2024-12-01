@@ -2,8 +2,17 @@ import sqlite3
 from flask import request
 from backend.database import get_db_connection
 from backend.utils.response_helper import create_response, ResponseType
-from backend.utils.server_utils import fetch_server_ips, verify_server_health, check_all_servers_health
+from backend.utils.server_utils import fetch_server_ips, verify_server_health, check_all_servers_health, call_server
 
+# Define the available commands (from GamepadController)
+SUPPORTED_GAMEPAD_COMMANDS = [
+    "press_a", "press_b", "press_x", "press_y",
+    "press_lb", "press_rb", "press_lt", "press_rt",
+    "press_up", "press_down", "press_left", "press_right",
+    "press_start", "press_back", "press_ls", "press_rs",
+    "start_anti_afk", "stop_anti_afk",
+    "start_movement", "stop_movement"
+]
 
 def delete_servers():
     data = request.get_json()
@@ -86,3 +95,50 @@ def check_server_health():
     # Prepare the response
     response = {"serversList": servers_status_with_reason}
     return create_response(ResponseType.SUCCESS, "Server health checked successfully.", response)
+
+def send_commands_to_servers():
+    """
+    Send commands to specified servers or all servers if no specific server is provided.
+
+    Request Payload:
+    {
+        "servers": ["serverIp1", "serverIp2"],  # Optional. If not provided, all servers are targeted.
+        "command": "press_a"  # Required. The command to send.
+    }
+
+    Returns:
+        JSON response indicating success or failure for each server.
+    """
+    data = request.get_json()
+
+    # Validate the request payload
+    if not isinstance(data, dict):
+        return create_response(ResponseType.ERROR, "Invalid payload format. Expected a JSON object.", {})
+
+    command = data.get("command")
+    if not command or command not in SUPPORTED_GAMEPAD_COMMANDS:
+        return create_response(
+            ResponseType.ERROR,
+            f"Invalid or unsupported command. Supported commands: {SUPPORTED_GAMEPAD_COMMANDS}",
+            {}
+        )
+
+    servers = data.get("servers", None)  # Optional
+    if servers is None:
+        # Fetch all servers if no specific servers are provided
+        servers = [server["serverIp"] for server in fetch_server_ips()]
+    elif not isinstance(servers, list):
+        return create_response(ResponseType.ERROR, "Invalid servers format. Expected a list of server IPs.", {})
+
+    # Send the command to each server
+    server_port = 9999  # Default server port
+    results = []
+    for server_ip in servers:
+        try:
+            response = call_server(server_ip, server_port, command)
+            results.append({"serverIp": server_ip, "status": "success", "response": response})
+        except Exception as e:
+            results.append({"serverIp": server_ip, "status": "error", "error": str(e)})
+
+    # Return the result
+    return create_response(ResponseType.SUCCESS, "Command execution results.", {"results": results})
