@@ -6,13 +6,27 @@ import { useLoggerStore } from "@/stores/loggerStore.js";
 import EmptyStateIcon from "@/assets/icons/database-storage.svg";
 import { useServerStore } from "@/stores/serverStore.js";
 import appConfig from "@/constants/appConfig.json";
-
+import { nextTick } from "vue";
 const loggerStore = useLoggerStore();
 const serverStore = useServerStore();
 const intervalId = ref(null);
 const healthList = ref([]); // Initialize as an empty array for reactivity
 const allServersList = computed(() => serverStore.getAllServers);
 const logs = computed(() => loggerStore.getLogs);
+
+const logList = ref(null);
+
+watch(logs, () => {
+  nextTick(() => {
+    const logListElement = logList.value;
+    if (logListElement && logListElement.$el) {
+      logListElement.$el.scrollTo({
+        top: logListElement.$el.scrollHeight,
+        behavior: 'smooth' // Smooth scrolling
+      });
+    }
+  });
+});
 
 // Fetch health data
 const fetchHealthData = async () => {
@@ -137,7 +151,7 @@ function getColorByStatus(status) {
     </div>
     <v-divider />
     <div style="background-color: black">
-      <v-list height="400" class="overflow-y-auto code-font">
+      <v-list ref="logList" height="400" class="overflow-y-auto code-font">
         <v-list-item v-for="(log, index) in logs" :key="index">
           <div class="list-text font-weight-bold">
             {{ log.cmdName }}

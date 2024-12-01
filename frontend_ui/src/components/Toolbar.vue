@@ -24,26 +24,6 @@ function openGithub() {
     <v-container class="d-flex flex-row align-center justify-space-between w-100" fluid>
       <!-- Invisible Spacer to Balance Text and Center the Logo -->
 
-<!--      <v-btn-->
-<!--        width="200"-->
-<!--        variant="outlined"-->
-<!--        @click="openGithub"-->
-<!--        class="font-weight-regular"-->
-<!--        style="text-transform: none;"-->
-<!--      >-->
-<!--        <template #prepend>-->
-<!--          <div>-->
-<!--            <v-img-->
-<!--              :src="github"-->
-<!--              height="20"-->
-<!--              width="20"-->
-<!--              class="mr-2"-->
-<!--            />-->
-<!--          </div>-->
-<!--        </template>-->
-<!--        Star on GitHub-->
-<!--      </v-btn>-->
-
       <div class="icon-button">
         <div class="icon-avatr pa-2">
           <v-img
@@ -52,7 +32,7 @@ function openGithub() {
             width="20"
           />
         </div>
-        <div class="ml-2 text-white pa-1 font-weight-medium">
+        <div class="ml-2 text-white pa-1 font-weight-medium" style="font-size: 14px">
           Star on GitHub
         </div>
       </div>
