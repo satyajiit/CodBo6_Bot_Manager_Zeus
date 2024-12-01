@@ -1,7 +1,7 @@
 <script setup>
 import appConfig from '@/constants/appConfig.json';
 import bo6Logo from '@/assets/icons/bo6.png';
-import github from '@/assets/icons/github.svg';
+import github from '@/assets/icons/github.png';
 import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 import {toast} from "vue3-toastify";
 
@@ -79,14 +79,14 @@ function openGithub() {
   align-items: center;
   justify-content: start;
   border-radius: 4px;
-  background-color: #009688;
+  background-color: #212121;
   cursor: pointer;
 }
 .icon-avatr {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #4DB6AC;
+  background-color: #424242;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 

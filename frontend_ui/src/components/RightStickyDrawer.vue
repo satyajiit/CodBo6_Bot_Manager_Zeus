@@ -18,8 +18,8 @@ const logList = ref(null);
 const isAutoScroll = ref(true);
 
 
-function toggleAutoScroll() {
-  isAutoScroll.value = !isAutoScroll.value;
+function toggleAutoScroll(value) {
+  isAutoScroll.value = value;
 }
 
 watch(logs, () => {
@@ -153,13 +153,48 @@ function getColorByStatus(status) {
     <div class="pa-4 d-flex flex-row align-center justify-space-between">
       <h4>Logs</h4>
 
-      <v-tooltip text="Disable Autoscroll">
-        <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" size="24" icon>
-            <v-icon size="small" @click="toggleAutoScroll" color="black">mdi-arrow-vertical-lock</v-icon>
-          </v-btn>
-        </template>
-      </v-tooltip>
+<!--      <v-tooltip text="Disable Autoscroll">-->
+<!--        <template v-slot:activator="{ props }">-->
+<!--          <v-btn v-bind="props" size="24" icon>-->
+<!--            <v-icon size="small" @click="toggleAutoScroll" color="black">mdi-arrow-vertical-lock</v-icon>-->
+<!--          </v-btn>-->
+<!--        </template>-->
+<!--      </v-tooltip>-->
+      <div class="d-inline-flex">
+        <div
+          @click="toggleAutoScroll(true)"
+          :style="{
+      backgroundColor: isAutoScroll ? '#009688' : '#dfdfdf',
+     cursor: 'pointer'
+    }"
+          v-ripple
+          class="pa-1 pl-2 pr-2"
+          style="border-bottom-left-radius: 4px; border-top-left-radius: 4px"
+        >
+          <v-icon
+            size="16"
+            :color="isAutoScroll ? '#ffffff' : '#000000'"
+            class="mdi mdi-lock-open"
+          />
+        </div>
+
+        <div
+          @click="toggleAutoScroll(false)"
+          :style="{
+      backgroundColor: !isAutoScroll ? '#009688' : '#dfdfdf',
+      cursor: 'pointer'
+    }"
+          class="pa-1 pl-2 pr-2"
+          style="border-bottom-right-radius: 4px; border-top-right-radius: 4px"
+        >
+          <v-icon
+            size="16"
+            :color="!isAutoScroll ? '#ffffff' : '#000000'"
+            class="mdi mdi-lock"
+          />
+        </div>
+      </div>
+
     </div>
     <v-divider />
     <div style="background-color: black">
