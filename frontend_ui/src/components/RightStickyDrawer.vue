@@ -108,145 +108,138 @@ function getColorByStatus(status) {
     permanent
   >
     <!-- Server Health Section -->
-    <div class="pa-4">
-      <h4>🖥️  Server Health</h4>
-    </div>
-    <v-divider />
-    <v-list
-      v-if="healthList.length > 0"
-      height="200"
-      class="overflow-y-auto"
-    >
-      <v-list-item
-        v-for="(serverHealth, index) in healthList"
-        :key="index"
-      >
-        <v-tooltip :text="serverHealth.reason">
-          <template #activator="{ props }">
-            <v-list-item-title
-              v-bind="props"
-              class="font-weight-bold"
-            >
-              {{ serverHealth.serverIp }}
-            </v-list-item-title>
-          </template>
-        </v-tooltip>
-        <template #append>
-          <div
-            v-if="serverHealth.status === 'healthy'"
-            class="d-flex ga-2 align-center"
-          >
-            <v-icon
-              color="#388E3C"
-              size="28px"
-            >
-              mdi-circle-medium
-            </v-icon>
-          </div>
-          <div
-            v-else
-            class="d-flex ga-2"
-          >
-            <v-icon
-              color="#E53935"
-              size="28px"
-            >
-              mdi-circle-medium
-            </v-icon>
-          </div>
-        </template>
-      </v-list-item>
-    </v-list>
-    <div
-      v-else
-      style="height: 200px"
-      class="d-flex flex-row align-center justify-center"
-    >
-      <v-card flat>
-        <v-card-text class="d-flex align-center justify-center flex-column text-center">
-          <v-img
-            class="mb-2"
-            height="50"
-            width="50"
-            :src="EmptyStateIcon"
-          />
-          Status of all your added servers would show here!
-        </v-card-text>
-      </v-card>
-    </div>
-    <v-divider />
-
-    <!-- Logs Section -->
-    <div class="pa-4 d-flex flex-row align-center justify-space-between">
-      <h4>Logs</h4>
-
-      <!--      <v-tooltip text="Disable Autoscroll">-->
-      <!--        <template v-slot:activator="{ props }">-->
-      <!--          <v-btn v-bind="props" size="24" icon>-->
-      <!--            <v-icon size="small" @click="toggleAutoScroll" color="black">mdi-arrow-vertical-lock</v-icon>-->
-      <!--          </v-btn>-->
-      <!--        </template>-->
-      <!--      </v-tooltip>-->
-      <div class="d-inline-flex">
-        <div
-          v-ripple
-          :style="{
-            backgroundColor: isAutoScroll ? '#009688' : '#dfdfdf',
-            cursor: 'pointer'
-          }"
-          class="pa-1 pl-2 pr-2"
-          style="border-bottom-left-radius: 4px; border-top-left-radius: 4px"
-          @click="toggleAutoScroll(true)"
-        >
-          <v-icon
-            size="16"
-            :color="isAutoScroll ? '#ffffff' : '#000000'"
-            class="mdi mdi-lock-open"
-          />
-        </div>
-
-        <div
-          :style="{
-            backgroundColor: !isAutoScroll ? '#009688' : '#dfdfdf',
-            cursor: 'pointer'
-          }"
-          class="pa-1 pl-2 pr-2"
-          style="border-bottom-right-radius: 4px; border-top-right-radius: 4px"
-          @click="toggleAutoScroll(false)"
-        >
-          <v-icon
-            size="16"
-            :color="!isAutoScroll ? '#ffffff' : '#000000'"
-            class="mdi mdi-lock"
-          />
-        </div>
+    <div style="height: 100%; overflow: hidden; display: flex; flex-direction: column">
+      <!-- Server Health Section -->
+      <div class="pa-4">
+        <h4>🖥️ Server Health</h4>
       </div>
-    </div>
-    <v-divider />
-    <div style="background-color: black">
+      <v-divider />
       <v-list
-        ref="logList"
-        height="400"
-        class="overflow-y-auto code-font"
+        v-if="healthList.length > 0"
+        style="height: 200px; overflow-y: auto"
+        class="overflow-y-auto"
       >
         <v-list-item
-          v-for="(log, index) in logs"
+          v-for="(serverHealth, index) in healthList"
           :key="index"
         >
-          <div class="list-text font-weight-bold">
-            {{ log.cmdName }}
-          </div>
-          <div class="list-text">
-            {{ new Date(log.timestamp).toLocaleString() }}
-          </div>
-          <div
-            :style="{ color: getColorByStatus(log.message) }"
-            class="list-text"
-          >
-            {{ log.message }}
-          </div>
+          <v-tooltip :text="serverHealth.reason">
+            <template #activator="{ props }">
+              <v-list-item-title
+                v-bind="props"
+                class="font-weight-bold"
+              >
+                {{ serverHealth.serverIp }}
+              </v-list-item-title>
+            </template>
+          </v-tooltip>
+          <template #append>
+            <div
+              v-if="serverHealth.status === 'healthy'"
+              class="d-flex ga-2 align-center"
+            >
+              <v-icon
+                color="#388E3C"
+                size="28px"
+              >
+                mdi-circle-medium
+              </v-icon>
+            </div>
+            <div
+              v-else
+              class="d-flex ga-2"
+            >
+              <v-icon
+                color="#E53935"
+                size="28px"
+              >
+                mdi-circle-medium
+              </v-icon>
+            </div>
+          </template>
         </v-list-item>
       </v-list>
+      <div
+        v-else
+        style="height: 200px"
+        class="d-flex flex-row align-center justify-center"
+      >
+        <v-card flat>
+          <v-card-text class="d-flex align-center justify-center flex-column text-center">
+            <v-img
+              class="mb-2"
+              height="50"
+              width="50"
+              :src="EmptyStateIcon"
+            />
+            Status of all your added servers would show here!
+          </v-card-text>
+        </v-card>
+      </div>
+      <v-divider />
+      <!-- Logs Section -->
+      <div class="pa-4 d-flex flex-row align-center justify-space-between">
+        <h4>Logs</h4>
+        <div class="d-inline-flex">
+          <div
+            v-ripple
+            :style="{
+              backgroundColor: isAutoScroll ? '#009688' : '#dfdfdf',
+              cursor: 'pointer'
+            }"
+            class="pa-1 pl-2 pr-2"
+            style="border-bottom-left-radius: 4px; border-top-left-radius: 4px"
+            @click="toggleAutoScroll(true)"
+          >
+            <v-icon
+              size="16"
+              :color="isAutoScroll ? '#ffffff' : '#000000'"
+              class="mdi mdi-lock-open"
+            />
+          </div>
+          <div
+            :style="{
+              backgroundColor: !isAutoScroll ? '#009688' : '#dfdfdf',
+              cursor: 'pointer'
+            }"
+            class="pa-1 pl-2 pr-2"
+            style="border-bottom-right-radius: 4px; border-top-right-radius: 4px"
+            @click="toggleAutoScroll(false)"
+          >
+            <v-icon
+              size="16"
+              :color="!isAutoScroll ? '#ffffff' : '#000000'"
+              class="mdi mdi-lock"
+            />
+          </div>
+        </div>
+      </div>
+      <v-divider />
+      <!-- Logs Section Scrollable -->
+      <div style="background-color: black; flex: 1; overflow-y: auto">
+        <v-list
+          ref="logList"
+          class="overflow-y-auto code-font"
+        >
+          <v-list-item
+            v-for="(log, index) in logs"
+            :key="index"
+          >
+            <div class="list-text font-weight-bold">
+              {{ log.cmdName }}
+            </div>
+            <div class="list-text">
+              {{ new Date(log.timestamp).toLocaleString() }}
+            </div>
+            <div
+              :style="{ color: getColorByStatus(log.message) }"
+              class="list-text"
+            >
+              {{ log.message }}
+            </div>
+          </v-list-item>
+        </v-list>
+      </div>
     </div>
   </v-navigation-drawer>
 </template>
