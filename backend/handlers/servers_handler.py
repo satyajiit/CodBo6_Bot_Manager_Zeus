@@ -124,10 +124,7 @@ def send_commands_to_servers():
         )
 
     servers = data.get("servers", None)  # Optional
-    if servers is None:
-        # Fetch all servers if no specific servers are provided
-        servers = [server["serverIp"] for server in fetch_server_ips()]
-    elif not isinstance(servers, list):
+    if not isinstance(servers, list):
         return create_response(ResponseType.ERROR, "Invalid servers format. Expected a list of server IPs.", {})
 
     # Send the command to each server
