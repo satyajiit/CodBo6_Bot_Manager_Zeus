@@ -133,7 +133,6 @@ async function handleButtonClick(command) {
 
     // Skip if no valid IPs
     if (formattedIps.length === 0) {
-      serverList = [];
       return;
     }
 
@@ -142,7 +141,7 @@ async function handleButtonClick(command) {
     };
 
     if (serverToSend.value !== appConfig.allServersText) {
-        payload.servers = [{ serverIp: serverToSend }]
+        payload.servers = [{ serverIp: serverToSend.value }]
     } else {
       payload.servers = formattedIps
     }
