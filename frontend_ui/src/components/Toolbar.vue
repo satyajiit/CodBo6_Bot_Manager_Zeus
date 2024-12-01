@@ -24,7 +24,7 @@ function openGithub() {
     <v-container class="d-flex flex-row align-center justify-space-between w-100" fluid>
       <!-- Invisible Spacer to Balance Text and Center the Logo -->
 
-      <div class="icon-button">
+      <div v-ripple @click="openGithub" class="icon-button">
         <div class="icon-avatr pa-2">
           <v-img
             :src="github"
@@ -32,7 +32,7 @@ function openGithub() {
             width="20"
           />
         </div>
-        <div class="ml-2 text-white pa-1 font-weight-medium" style="font-size: 14px">
+        <div class="ml-2 text-white pa-1 font-weight-medium" style="font-size: 14px; user-select: none">
           Star on GitHub
         </div>
       </div>
@@ -80,6 +80,7 @@ function openGithub() {
   justify-content: start;
   border-radius: 4px;
   background-color: #009688;
+  cursor: pointer;
 }
 .icon-avatr {
   display: flex;
