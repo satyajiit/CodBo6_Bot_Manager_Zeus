@@ -15,11 +15,17 @@ const allServersList = computed(() => serverStore.getAllServers);
 const logs = computed(() => loggerStore.getLogs);
 
 const logList = ref(null);
+const isAutoScroll = ref(true);
+
+
+function toggleAutoScroll() {
+  isAutoScroll.value = !isAutoScroll.value;
+}
 
 watch(logs, () => {
   nextTick(() => {
     const logListElement = logList.value;
-    if (logListElement && logListElement.$el) {
+    if (logListElement && logListElement.$el && isAutoScroll.value) {
       logListElement.$el.scrollTo({
         top: logListElement.$el.scrollHeight,
         behavior: 'smooth' // Smooth scrolling
@@ -146,8 +152,16 @@ function getColorByStatus(status) {
     <v-divider />
 
     <!-- Logs Section -->
-    <div class="pa-4">
+    <div class="pa-4 d-flex flex-row align-center justify-space-between">
       <h4>Logs</h4>
+
+      <v-tooltip text="Disable Autoscroll">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" size="24" icon>
+            <v-icon size="small" @click="toggleAutoScroll" color="black">mdi-arrow-vertical-lock</v-icon>
+          </v-btn>
+        </template>
+      </v-tooltip>
     </div>
     <v-divider />
     <div style="background-color: black">
