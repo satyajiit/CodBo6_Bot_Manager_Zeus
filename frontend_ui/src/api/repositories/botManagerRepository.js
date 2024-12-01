@@ -66,7 +66,28 @@ const BotManagerRepository = {
     return withLogging(cmdName, requestMessage, () =>
       axiosInstance.get(cmdName)
     );
+  },
+
+  sendCommandsToServers(data) {
+    const cmdName = '/sendCommandToServers';
+
+    console.log(data)
+
+    // Determine the request message based on the servers
+    let requestMessage;
+    if (data.servers && data.servers.length > 0) {
+      requestMessage = `Sending command "${data.command}" to specific servers: ${data.servers.join(', ')}.`;
+    } else {
+      requestMessage = `Sending command "${data.command}" to all servers.`;
+    }
+
+    // Use withLogging to handle API call and logging
+    return withLogging(cmdName, requestMessage, () =>
+      axiosInstance.post(cmdName, data)
+    );
   }
 };
+
+
 
 export default BotManagerRepository;

@@ -6,29 +6,27 @@
         <v-btn
           outlined
           class="button l-button"
-          @click="handleButtonClick('L')"
+          @click="handleButtonClick('press_lb')"
         >
           L
         </v-btn>
         <v-btn
           outlined
           class="button r-button"
-          @click="handleButtonClick('R')"
+          @click="handleButtonClick('press_rb')"
         >
           R
         </v-btn>
       </v-row>
 
-
       <div class="d-flex flex-row align-center justify-space-between pt-6">
         <v-row dense style="max-width: 250px">
-          <v-col cols="4">
-          </v-col>
+          <v-col cols="4"></v-col>
           <v-col cols="4">
             <v-btn
               outlined
               class="button"
-              @click="handleButtonClick('Up')"
+              @click="handleButtonClick('press_up')"
             >
               <v-icon
                 icon="mdi-arrow-up-bold"
@@ -36,13 +34,12 @@
               ></v-icon>
             </v-btn>
           </v-col>
-          <v-col cols="4">
-          </v-col>
+          <v-col cols="4"></v-col>
           <v-col cols="4">
             <v-btn
               outlined
               class="button"
-              @click="handleButtonClick('Left')"
+              @click="handleButtonClick('press_left')"
             >
               <v-icon
                 icon="mdi-arrow-left-bold"
@@ -54,7 +51,7 @@
             <v-btn
               outlined
               class="button"
-              @click="handleButtonClick('Down')"
+              @click="handleButtonClick('press_down')"
             >
               <v-icon
                 icon="mdi-arrow-down-bold"
@@ -66,7 +63,7 @@
             <v-btn
               outlined
               class="button"
-              @click="handleButtonClick('Right')"
+              @click="handleButtonClick('press_right')"
             >
               <v-icon
                 icon="mdi-arrow-right-bold"
@@ -80,7 +77,7 @@
             outlined
             class="button y-button"
             color="yellow darken-2"
-            @click="handleButtonClick('Y')"
+            @click="handleButtonClick('press_y')"
           >
             Y
           </v-btn>
@@ -88,7 +85,7 @@
             outlined
             class="button x-button"
             color="blue darken-2"
-            @click="handleButtonClick('X')"
+            @click="handleButtonClick('press_x')"
           >
             X
           </v-btn>
@@ -96,7 +93,7 @@
             outlined
             class="button a-button"
             color="green darken-2"
-            @click="handleButtonClick('A')"
+            @click="handleButtonClick('press_a')"
           >
             A
           </v-btn>
@@ -104,7 +101,7 @@
             outlined
             class="button b-button"
             color="red darken-2"
-            @click="handleButtonClick('B')"
+            @click="handleButtonClick('press_b')"
           >
             B
           </v-btn>
@@ -115,9 +112,30 @@
 </template>
 
 <script setup>
-function handleButtonClick(button) {
-  console.log(`${button} clicked!`);
-  // Add your logic here for each button click
+import { useServerStore } from "@/stores/serverStore.js";
+import botManagerRepository from "@/api/repositories/botManagerRepository.js";
+import appConfig from '@/constants/appConfig.json';
+
+const serverToSend = computed(() => serverStore.getCurrentlySelected)
+
+
+const serverStore = useServerStore()
+async function handleButtonClick(command) {
+  console.log(`${command} clicked!`);
+  try {
+    const payload = {
+      command: command,
+    };
+
+    if (serverToSend.value !== appConfig.allServersText) {
+        payload.servers = [{ serverIp: serverToSend }]
+    }
+
+    const response = await botManagerRepository.sendCommandsToServers(payload);
+    console.log(`Command sent successfully:`, response.data);
+  } catch (error) {
+    console.error(`Failed to send command "${command}":`, error);
+  }
 }
 </script>
 
