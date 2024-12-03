@@ -1,18 +1,17 @@
 <template>
-  <v-container class="h-100" fluid>
+  <v-container
+    class="h-100"
+    fluid
+  >
     <v-tabs
       v-model="tab"
       mandatory
       color="primary"
       fixed-tabs
     >
-      <v-tab text="☁️ Xbox Cloud">
-
-      </v-tab>
-
-      <v-tab text="🎮 In-Game">
-
-      </v-tab>
+      <v-tab text="☁️ Xbox Cloud" />
+      <v-tab text="🎮 In-Game" />
+      <v-tab text="⚙️ Chrome Configs" />
     </v-tabs>
 
     <v-tabs-window v-model="tab">
@@ -20,12 +19,12 @@
         <v-list>
           <v-list-item>
             <v-switch
-              color="primary"
               v-model="xboxSwitch"
+              color="primary"
               class="pl-3"
               :label="`Enable AFK in Xbox Server`"
               hide-details
-            ></v-switch>
+            />
           </v-list-item>
         </v-list>
       </v-tabs-window-item>
@@ -33,12 +32,34 @@
         <v-list>
           <v-list-item>
             <v-switch
-              color="primary"
               v-model="inGameSwitch"
+              color="primary"
               class="pl-3"
               :label="`Enable Movement AFK in in game`"
               hide-details
-            ></v-switch>
+            />
+          </v-list-item>
+        </v-list>
+      </v-tabs-window-item>
+      <v-tabs-window-item>
+        <v-list>
+          <v-list-item link>
+            <v-list-item-title>
+              Install TaperMonkey Extension
+            </v-list-item-title>
+            <v-list-item-subtitle />
+            <template #append>
+              <v-icon>mdi-open-in-new</v-icon>
+            </template>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-title>
+              Open chrome windows
+            </v-list-item-title>
+            <v-list-item-subtitle />
+            <template #append>
+              <v-icon>mdi-open-in-new</v-icon>
+            </template>
           </v-list-item>
         </v-list>
       </v-tabs-window-item>
