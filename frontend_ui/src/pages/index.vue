@@ -45,7 +45,7 @@
         <v-list>
           <v-list-item link>
             <v-list-item-title>
-              Install TaperMonkey Extension
+              Install TaperMonkey Extension on all Chrome profiles
             </v-list-item-title>
             <v-list-item-subtitle />
             <template #append>
@@ -54,7 +54,7 @@
           </v-list-item>
           <v-list-item link>
             <v-list-item-title>
-              Open all chrome profiles
+              Open all chrome profiles on target VM
             </v-list-item-title>
             <v-list-item-subtitle />
             <template #append>

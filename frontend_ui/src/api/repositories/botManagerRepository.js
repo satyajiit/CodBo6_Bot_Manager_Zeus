@@ -84,7 +84,26 @@ const BotManagerRepository = {
     return withLogging(cmdName, requestMessage, () =>
       axiosInstance.post(cmdName, data)
     );
+  } ,
+
+  sendDashboardCommandsToServers(data) {
+    const cmdName = '/sendDashboardCommands';
+
+    console.log(data)
+
+    // Determine the request message based on the servers
+    let requestMessage;
+    if (data.servers && data.servers.length > 0) {
+      requestMessage = `Sending command "${data.command}" to specific servers: ${data.servers.join(', ')}.`;
+    } else {
+      requestMessage = `Sending command "${data.command}" to all servers.`;
+    }
+
+    return withLogging(cmdName, requestMessage, () =>
+      axiosInstance.post(cmdName, data)
+    );
   }
+
 };
 
 

@@ -137,7 +137,7 @@ async function handleButtonClick(command) {
     }
 
     const payload = {
-      keyCode: command,
+      command: command,
     };
 
     if (serverToSend.value !== appConfig.allServersText) {
