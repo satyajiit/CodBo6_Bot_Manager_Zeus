@@ -68,20 +68,19 @@ const BotManagerRepository = {
     );
   },
 
-  sendCommandsToServers(data) {
-    const cmdName = '/sendCommandToServers';
+  sendGamePadCommandsToServers(data) {
+    const cmdName = '/sendGamePadCommandToServers';
 
     console.log(data)
 
     // Determine the request message based on the servers
     let requestMessage;
     if (data.servers && data.servers.length > 0) {
-      requestMessage = `Sending command "${data.command}" to specific servers: ${data.servers.join(', ')}.`;
+      requestMessage = `Sending gamepad command "${data.command}" to specific servers: ${data.servers.join(', ')}.`;
     } else {
-      requestMessage = `Sending command "${data.command}" to all servers.`;
+      requestMessage = `Sending gamepad command "${data.command}" to all servers.`;
     }
 
-    // Use withLogging to handle API call and logging
     return withLogging(cmdName, requestMessage, () =>
       axiosInstance.post(cmdName, data)
     );

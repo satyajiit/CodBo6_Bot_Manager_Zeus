@@ -26,7 +26,7 @@
             <v-btn
               outlined
               class="button"
-              @click="handleButtonClick('press_up')"
+              @click="handleButtonClick('press_dpad_up')"
             >
               <v-icon
                 icon="mdi-arrow-up-bold"
@@ -39,7 +39,7 @@
             <v-btn
               outlined
               class="button"
-              @click="handleButtonClick('press_left')"
+              @click="handleButtonClick('press_dpad_left')"
             >
               <v-icon
                 icon="mdi-arrow-left-bold"
@@ -51,7 +51,7 @@
             <v-btn
               outlined
               class="button"
-              @click="handleButtonClick('press_down')"
+              @click="handleButtonClick('press_dpad_down')"
             >
               <v-icon
                 icon="mdi-arrow-down-bold"
@@ -63,7 +63,7 @@
             <v-btn
               outlined
               class="button"
-              @click="handleButtonClick('press_right')"
+              @click="handleButtonClick('press_dpad_right')"
             >
               <v-icon
                 icon="mdi-arrow-right-bold"
@@ -116,15 +116,15 @@ import { useServerStore } from "@/stores/serverStore.js";
 import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 import appConfig from '@/constants/appConfig.json';
 import {computed} from "vue";
+import {toast} from "vue3-toastify";
+import {useLoaderStore} from "@/stores/loaderStore.js";
 
 const serverToSend = computed(() => serverStore.getCurrentlySelected)
 const allServersList = computed(() => serverStore.getAllServers);
-
+const loaderStore = useLoaderStore();
 
 const serverStore = useServerStore()
 async function handleButtonClick(command) {
-  console.log(`${command} clicked!`);
-  let serverList = []
   try {
 
     const formattedIps = allServersList.value.filter(
@@ -137,7 +137,7 @@ async function handleButtonClick(command) {
     }
 
     const payload = {
-      command: command,
+      keyCode: command,
     };
 
     if (serverToSend.value !== appConfig.allServersText) {
@@ -145,11 +145,13 @@ async function handleButtonClick(command) {
     } else {
       payload.servers = formattedIps
     }
-
-    const response = await botManagerRepository.sendCommandsToServers(payload);
-    console.log(`Command sent successfully:`, response.data);
+    loaderStore.showLoader('Sending Gamepad Command...');
+    const response = await botManagerRepository.sendGamePadCommandsToServers(payload);
+    toast.success(response.message)
+    loaderStore.hideLoader();
   } catch (error) {
-    console.error(`Failed to send command "${command}":`, error);
+    loaderStore.hideLoader();
+    toast.error(`Failed to send command "${command}": ${error.message}`);
   }
 }
 </script>

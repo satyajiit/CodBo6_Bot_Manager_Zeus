@@ -54,7 +54,7 @@
           </v-list-item>
           <v-list-item link>
             <v-list-item-title>
-              Open chrome windows
+              Open all chrome profiles
             </v-list-item-title>
             <v-list-item-subtitle />
             <template #append>
