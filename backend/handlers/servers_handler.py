@@ -1,13 +1,15 @@
 import sqlite3
+
 from flask import request
+
 from backend.database import get_db_connection
 from backend.utils.response_helper import create_response, ResponseType
-from backend.utils.server_utils import fetch_server_ips, verify_server_health, check_all_servers_health, call_server
+from backend.utils.server_utils import fetch_server_ips, check_all_servers_health, call_server
 
 # Define the available commands (from GamepadController)
 SUPPORTED_SERVER_COMMANDS = [
     "press_a", "press_b", "press_x", "press_y",
-    "press_lb", "press_rb", "press_lt", "press_rt",
+    "press_lb", "press_rb", "press_lt", "press_rt", "start_anti_afk", "stop_anti_afk",
     "press_dpad_up", "press_dpad_down", "press_dpad_left", "press_dpad_right",
     "press_start", "press_back", "press_ls", "press_rs"
 ]
