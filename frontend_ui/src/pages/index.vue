@@ -74,7 +74,7 @@ async function handleClick(command) {
               <v-icon>mdi-arrow-right</v-icon>
             </template>
           </v-list-item>
-          <v-list-item link @click="handleClick(`start_anti_afk`)">
+          <v-list-item link @click="handleClick(`stop_anti_afk`)">
             <v-list-item-title>
               Disable AFK in Xbox Server
             </v-list-item-title>
@@ -88,7 +88,7 @@ async function handleClick(command) {
       </v-tabs-window-item>
       <v-tabs-window-item>
         <v-list>
-          <v-list-item link>
+          <v-list-item link @click="handleClick('start_movement')">
             <v-list-item-title>
               Enable Movement AFK in in game
             </v-list-item-title>
@@ -97,7 +97,7 @@ async function handleClick(command) {
               <v-icon>mdi-arrow-right</v-icon>
             </template>
           </v-list-item>
-          <v-list-item link>
+          <v-list-item link @click="handleClick('stop_movement')">
             <v-list-item-title>
               Disable Movement AFK in in game
             </v-list-item-title>
@@ -110,7 +110,7 @@ async function handleClick(command) {
       </v-tabs-window-item>
       <v-tabs-window-item>
         <v-list>
-          <v-list-item link>
+          <v-list-item link @click="handleClick('install_tampermonkey')">
             <v-list-item-title>
               Install TaperMonkey Extension on all Chrome profiles
             </v-list-item-title>
@@ -119,7 +119,7 @@ async function handleClick(command) {
               <v-icon>mdi-arrow-right</v-icon>
             </template>
           </v-list-item>
-          <v-list-item link>
+          <v-list-item link @click="handleClick('install_tampermonkey_script')">
             <v-list-item-title>
               Install BetterX Cloud Extension on all Chrome profiles
             </v-list-item-title>
@@ -128,7 +128,7 @@ async function handleClick(command) {
               <v-icon>mdi-arrow-right</v-icon>
             </template>
           </v-list-item>
-          <v-list-item link>
+          <v-list-item link @click="handleClick('open_all_chrome_profiles')">
             <v-list-item-title>
               Open all chrome profiles on target VM
             </v-list-item-title>
