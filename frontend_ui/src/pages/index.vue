@@ -1,3 +1,48 @@
+<script setup>
+import { useServerStore } from "@/stores/serverStore.js";
+import botManagerRepository from "@/api/repositories/botManagerRepository.js";
+import appConfig from '@/constants/appConfig.json';
+import {computed} from "vue";
+import {toast} from "vue3-toastify";
+import {useLoaderStore} from "@/stores/loaderStore.js";
+
+const serverToSend = computed(() => serverStore.getCurrentlySelected)
+const allServersList = computed(() => serverStore.getAllServers);
+const loaderStore = useLoaderStore();
+
+async function handleClick(command) {
+  try {
+
+    const formattedIps = allServersList.value.filter(
+      (server) => server.serverIp !== appConfig.allServersText
+    );
+
+    // Skip if no valid IPs
+    if (formattedIps.length === 0) {
+      return;
+    }
+
+    const payload = {
+      command: command,
+    };
+
+    if (serverToSend.value !== appConfig.allServersText) {
+      payload.servers = [{ serverIp: serverToSend.value }]
+    } else {
+      payload.servers = formattedIps
+    }
+    loaderStore.showLoader('Sending Command...');
+    const response = await botManagerRepository.sendDashboardCommandsToServers(payload);
+    toast.success(response.message)
+    loaderStore.hideLoader();
+  } catch (error) {
+    loaderStore.hideLoader();
+    toast.error(`Failed to send command "${command}": ${error.message}`);
+  }
+}
+
+</script>
+
 <template>
   <v-container
     class="h-100"
@@ -66,12 +111,3 @@
     </v-tabs-window>
   </v-container>
 </template>
-
-<script setup>
-import { ref } from 'vue';
-
-  let tab = ref(0);
-
-  let xboxSwitch = ref(false);
-  let inGameSwitch = ref(false);
-</script>
