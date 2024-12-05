@@ -2,10 +2,13 @@
 import { useServerStore } from "@/stores/serverStore.js";
 import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 import appConfig from '@/constants/appConfig.json';
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import {toast} from "vue3-toastify";
 import {useLoaderStore} from "@/stores/loaderStore.js";
 
+
+let tab = ref(0);
+const serverStore = useServerStore();
 const serverToSend = computed(() => serverStore.getCurrentlySelected)
 const allServersList = computed(() => serverStore.getAllServers);
 const loaderStore = useLoaderStore();
@@ -62,7 +65,7 @@ async function handleClick(command) {
     <v-tabs-window v-model="tab">
       <v-tabs-window-item>
         <v-list>
-          <v-list-item link>
+          <v-list-item link @click="handleClick(`start_anti_afk`)">
             <v-list-item-title>
               Enable AFK in Xbox Server
             </v-list-item-title>
