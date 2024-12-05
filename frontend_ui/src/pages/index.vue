@@ -74,6 +74,16 @@ async function handleClick(command) {
               <v-icon>mdi-arrow-right</v-icon>
             </template>
           </v-list-item>
+          <v-list-item link @click="handleClick(`start_anti_afk`)">
+            <v-list-item-title>
+              Disable AFK in Xbox Server
+            </v-list-item-title>
+            <v-list-item-subtitle />
+            <template #append>
+              <v-icon>mdi-arrow-right</v-icon>
+            </template>
+          </v-list-item>
+
         </v-list>
       </v-tabs-window-item>
       <v-tabs-window-item>
@@ -87,6 +97,15 @@ async function handleClick(command) {
               <v-icon>mdi-arrow-right</v-icon>
             </template>
           </v-list-item>
+          <v-list-item link>
+            <v-list-item-title>
+              Disable Movement AFK in in game
+            </v-list-item-title>
+            <v-list-item-subtitle />
+            <template #append>
+              <v-icon>mdi-arrow-right</v-icon>
+            </template>
+          </v-list-item>
         </v-list>
       </v-tabs-window-item>
       <v-tabs-window-item>
@@ -94,6 +113,15 @@ async function handleClick(command) {
           <v-list-item link>
             <v-list-item-title>
               Install TaperMonkey Extension on all Chrome profiles
+            </v-list-item-title>
+            <v-list-item-subtitle />
+            <template #append>
+              <v-icon>mdi-arrow-right</v-icon>
+            </template>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-title>
+              Install BetterX Cloud Extension on all Chrome profiles
             </v-list-item-title>
             <v-list-item-subtitle />
             <template #append>
