@@ -17,27 +17,27 @@
     <v-tabs-window v-model="tab">
       <v-tabs-window-item>
         <v-list>
-          <v-list-item>
-            <v-switch
-              v-model="xboxSwitch"
-              color="primary"
-              class="pl-3"
-              :label="`Enable AFK in Xbox Server`"
-              hide-details
-            />
+          <v-list-item link>
+            <v-list-item-title>
+              Enable AFK in Xbox Server
+            </v-list-item-title>
+            <v-list-item-subtitle />
+            <template #append>
+              <v-icon>mdi-arrow-right</v-icon>
+            </template>
           </v-list-item>
         </v-list>
       </v-tabs-window-item>
       <v-tabs-window-item>
         <v-list>
-          <v-list-item>
-            <v-switch
-              v-model="inGameSwitch"
-              color="primary"
-              class="pl-3"
-              :label="`Enable Movement AFK in in game`"
-              hide-details
-            />
+          <v-list-item link>
+            <v-list-item-title>
+              Enable Movement AFK in in game
+            </v-list-item-title>
+            <v-list-item-subtitle />
+            <template #append>
+              <v-icon>mdi-arrow-right</v-icon>
+            </template>
           </v-list-item>
         </v-list>
       </v-tabs-window-item>
@@ -49,7 +49,7 @@
             </v-list-item-title>
             <v-list-item-subtitle />
             <template #append>
-              <v-icon>mdi-open-in-new</v-icon>
+              <v-icon>mdi-arrow-right</v-icon>
             </template>
           </v-list-item>
           <v-list-item link>
@@ -58,7 +58,7 @@
             </v-list-item-title>
             <v-list-item-subtitle />
             <template #append>
-              <v-icon>mdi-open-in-new</v-icon>
+              <v-icon>mdi-arrow-right</v-icon>
             </template>
           </v-list-item>
         </v-list>
