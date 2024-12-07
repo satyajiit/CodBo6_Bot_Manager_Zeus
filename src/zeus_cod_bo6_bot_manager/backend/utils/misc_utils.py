@@ -1,6 +1,6 @@
 import webbrowser
 from flask import request
-from backend.utils.response_helper import create_response, ResponseType
+from zeus_cod_bo6_bot_manager.backend.utils.response_helper import create_response, ResponseType
 import os
 import hashlib
 import platform

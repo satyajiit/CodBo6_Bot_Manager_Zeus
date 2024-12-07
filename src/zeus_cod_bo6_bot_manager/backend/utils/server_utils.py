@@ -1,9 +1,9 @@
 import os
 
-from backend.database import get_db_connection
+from zeus_cod_bo6_bot_manager.backend.database import get_db_connection
 import socket
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from backend.utils.misc_utils import get_device_hwid
+from zeus_cod_bo6_bot_manager.backend.utils.misc_utils import get_device_hwid
 
 CONFIG_FILE_PATH = os.path.join(os.getcwd(), "config", "servers.in")
 

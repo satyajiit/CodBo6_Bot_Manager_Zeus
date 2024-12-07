@@ -5,11 +5,18 @@ const serverStore = useServerStore();
 
 const BotManagerRepository = {
 
-  tailServerLogs(serverIp) {
+  tailServerLogs(data) {
     const cmdName = '/tailLogs';
-    const requestMessage = 'Tailing logs...';
+    let requestMessage;
+    if (data.servers && data.servers.length === serverStore.servers.length) {
+      requestMessage = `Getting logs from "${data.command}" specific servers: ${data.servers.join(', ')}.`;
+    } else {
+      requestMessage = `Getting logs "${data.command}" from all servers.`;
+    }
 
-    return withLogging(cmdName, requestMessage, () => axiosInstance.post(cmdName, serverIp))
+    return withLogging(cmdName, requestMessage, () =>
+      axiosInstance.post(cmdName, data)
+    );
   },
 
   openUrlOnBrowser(data) {
@@ -97,12 +104,9 @@ const BotManagerRepository = {
 
   sendDashboardCommandsToServers(data) {
     const cmdName = '/sendDashboardCommands';
-
-    console.log(data)
-
     // Determine the request message based on the servers
     let requestMessage;
-    if (data.servers && data.servers.length > 0) {
+    if (data.servers && data.servers.length === serverStore.servers.length) {
       requestMessage = `Sending command "${data.command}" to specific servers: ${data.servers.join(', ')}.`;
     } else {
       requestMessage = `Sending command "${data.command}" to all servers.`;

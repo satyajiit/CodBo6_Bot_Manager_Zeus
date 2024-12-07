@@ -2,17 +2,48 @@
 
 import botManagerRepository from "@/api/repositories/botManagerRepository.js";
 import {toast} from "vue3-toastify";
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import appConfig from "@/constants/appConfig.json";
+import {useLoaderStore} from "@/stores/loaderStore.js";
+import { useServerStore } from "@/stores/serverStore.js";
+const serverStore = useServerStore()
 
 let logsData = ref({});
+const allServersList = computed(() => serverStore.getAllServers);
+const loaderStore = useLoaderStore();
 
 
-    botManagerRepository.tailServerLogs().then((response) => {
-      logsData.value = response.data
-      console.log("Logs", logsData.value)
-    }).catch((error) => {
-      toast.error(error.message);
-    });
+async function getLogs() {
+  try {
+
+    const formattedIps = allServersList.value.filter(
+      (server) => server.serverIp !== appConfig.allServersText
+    );
+
+    // Skip if no valid IPs
+    if (formattedIps.length === 0) {
+      return;
+    }
+
+    const payload = {
+      command: "tail_logs",
+    };
+
+    payload.servers = formattedIps
+
+    loaderStore.showLoader('Getting logs...');
+    const response = await botManagerRepository.tailServerLogs(payload);
+    logsData.value = response.data;
+    loaderStore.hideLoader();
+
+  } catch (e) {
+    loaderStore.hideLoader();
+    toast.error(`Failed get logs": ${e.message}`);
+  }
+}
+
+getLogs()
+
 
 </script>
 

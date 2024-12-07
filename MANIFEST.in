@@ -1,0 +1,9 @@
+recursive-include src/zeus_cod_bo6_bot_manager/frontend_ui/public *
+recursive-include src/zeus_cod_bo6_bot_manager/frontend_ui/src *
+include src/zeus_cod_bo6_bot_manager/frontend_ui/index.html
+include src/zeus_cod_bo6_bot_manager/frontend_ui/package.json
+include src/zeus_cod_bo6_bot_manager/frontend_ui/.browserlistrc
+include src/zeus_cod_bo6_bot_manager/frontend_ui/.eslint.config.js
+include src/zeus_cod_bo6_bot_manager/frontend_ui/.eslintrc-auto-import.js
+include src/zeus_cod_bo6_bot_manager/frontend_ui/jsconfig.json
+include src/zeus_cod_bo6_bot_manager/frontend_ui/vite.config.mjs

@@ -2,9 +2,9 @@ import sqlite3
 
 from flask import request
 
-from backend.database import get_db_connection
-from backend.utils.response_helper import create_response, ResponseType
-from backend.utils.server_utils import fetch_server_ips, check_all_servers_health, call_server
+from zeus_cod_bo6_bot_manager.backend.database import get_db_connection
+from zeus_cod_bo6_bot_manager.backend.utils.response_helper import create_response, ResponseType
+from zeus_cod_bo6_bot_manager.backend.utils.server_utils import fetch_server_ips, check_all_servers_health, call_server
 
 # Define the available commands (from GamepadController)
 SUPPORTED_SERVER_COMMANDS = [

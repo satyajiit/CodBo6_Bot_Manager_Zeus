@@ -1,7 +1,7 @@
-from backend.handlers.misc_handlers import get_hwid, copy_to_clipboard
-from backend.handlers.servers_handler import get_servers, add_servers, check_server_health, delete_servers, \
+from zeus_cod_bo6_bot_manager.backend.handlers.misc_handlers import get_hwid, copy_to_clipboard
+from zeus_cod_bo6_bot_manager.backend.handlers.servers_handler import get_servers, add_servers, check_server_health, delete_servers, \
     send_commands_to_target_vm, fetch_logs_from_servers
-from backend.utils.misc_utils import open_url_browser
+from zeus_cod_bo6_bot_manager.backend.utils.misc_utils import open_url_browser
 
 
 def register_routes(app):

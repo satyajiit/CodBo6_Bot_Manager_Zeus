@@ -5,8 +5,8 @@ import uuid
 import pyperclip
 from flask import request
 
-from backend.utils.misc_utils import get_device_hwid
-from backend.utils.response_helper import create_response, ResponseType
+from zeus_cod_bo6_bot_manager.backend.utils.misc_utils import get_device_hwid
+from zeus_cod_bo6_bot_manager.backend.utils.response_helper import create_response, ResponseType
 
 def copy_to_clipboard(): # pragma: no cover
     """Copy the provided text to the clipboard."""

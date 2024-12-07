@@ -1,7 +1,7 @@
 from flask import Flask
-from backend.endpoints import register_routes
+from zeus_cod_bo6_bot_manager.backend.endpoints import register_routes
 from flask_cors import CORS
-from backend.database import init_db
+from zeus_cod_bo6_bot_manager.backend.database import init_db
 
 
 def create_app():
