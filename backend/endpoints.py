@@ -1,6 +1,6 @@
 from backend.handlers.misc_handlers import get_hwid, copy_to_clipboard
 from backend.handlers.servers_handler import get_servers, add_servers, check_server_health, delete_servers, \
-    send_commands_to_target_vm
+    send_commands_to_target_vm, fetch_logs_from_servers
 from backend.utils.misc_utils import open_url_browser
 
 
@@ -14,3 +14,4 @@ def register_routes(app):
     app.add_url_rule("/openUrlOnBrowser", view_func=open_url_browser, methods=["POST"])
     app.add_url_rule("/sendDashboardCommands", view_func=send_commands_to_target_vm, methods=["POST"])
     app.add_url_rule("/sendGamePadCommandToServers", view_func=send_commands_to_target_vm, methods=["POST"])
+    app.add_url_rule("/tailLogs", view_func=fetch_logs_from_servers, methods=["POST"])
