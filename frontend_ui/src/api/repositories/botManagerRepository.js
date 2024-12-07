@@ -1,5 +1,7 @@
 import axiosInstance from '@/api/axiosInstance';
 import { withLogging } from '@/utils/withLogging';
+import { useServerStore } from "@/stores/serverStore.js";
+const serverStore = useServerStore();
 
 const BotManagerRepository = {
 
@@ -27,8 +29,8 @@ const BotManagerRepository = {
     const requestMessage = 'Checking health of servers';
 
     //withLogging to handle API call and logging
-    return withLogging(cmdName, requestMessage, () =>
-      axiosInstance.post(cmdName, data)
+    return withLogging(cmdName, requestMessage, (() =>
+      axiosInstance.post(cmdName, data)), false
     );
   },
 
@@ -63,9 +65,9 @@ const BotManagerRepository = {
     const cmdName = '/getServers';
     const requestMessage = 'Fetching server list from the database...';
 
-    return withLogging(cmdName, requestMessage, () =>
+    return withLogging(cmdName, requestMessage, (() =>
       axiosInstance.get(cmdName)
-    );
+    ), false);
   },
 
   sendGamePadCommandsToServers(data) {
@@ -75,7 +77,7 @@ const BotManagerRepository = {
 
     // Determine the request message based on the servers
     let requestMessage;
-    if (data.servers && data.servers.length > 0) {
+    if (data.servers && data.servers.length === serverStore.servers.length) {
       requestMessage = `Sending gamepad command "${data.command}" to specific servers: ${data.servers.join(', ')}.`;
     } else {
       requestMessage = `Sending gamepad command "${data.command}" to all servers.`;
