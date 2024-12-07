@@ -132,12 +132,69 @@ def send_commands_to_target_vm():
     """
     servers, command = do_basic_validation(request.get_json())
     results = []
+    print(f"Sending command '{command}' to target VMs...server list: {servers}")
     for server in servers:
         try:
             response = call_server(server["serverIp"], 9999, command)
             results.append({"serverIp": server["serverIp"], "status": "success", "response": response})
+            print(f"Command '{command}' sent to {server['serverIp']} successfully")
         except Exception as e:
             results.append({"serverIp": server["serverIp"], "status": "error", "error": str(e)})
 
     # Return the result
     return create_response(ResponseType.SUCCESS, "All commands passed to the target VMs.", {"results": results})
+
+
+def fetch_logs_from_servers():
+    """
+    Fetch the last 100 lines of logs from specified servers or all servers if none specified.
+
+    Request Payload (JSON):
+    {
+        "servers": ["serverIp1", "serverIp2"]  # Optional. If not provided, all servers are targeted.
+    }
+
+    Response:
+    {
+        "status": "success" or "error",
+        "message": "All logs fetched successfully." or an error message,
+        "data": {
+            "results": [
+                {
+                    "serverIp": "serverIpX",
+                    "status": "success",
+                    "logs": ["line1", "line2", ..., "lineN"]
+                },
+                {
+                    "serverIp": "serverIpY",
+                    "status": "error",
+                    "error": "Error message"
+                }
+            ]
+        }
+    }
+    """
+    request_data = request.get_json()
+    servers, _ = do_basic_validation(request_data)
+    results = []
+    command = "tail_logs"
+
+    print(f"Fetching logs from target VMs... server list: {servers}")
+    for server in servers:
+        server_ip = server["serverIp"]
+        try:
+            response = call_server(server_ip, 9999, command)
+            # The response is a big string of logs separated by newlines
+            # Convert to an array of lines
+            lines = response.split('\n')
+
+            lines = [line for line in lines if line.strip()]
+
+            results.append({"serverIp": server_ip, "status": "success", "logs": lines})
+            print(f"Logs fetched from {server_ip} successfully")
+        except Exception as e:
+            results.append({"serverIp": server_ip, "status": "error", "error": str(e)})
+            print(f"Error fetching logs from {server_ip}: {e}")
+
+    # Return the result
+    return create_response(ResponseType.SUCCESS, "Logs fetched successfully.", {"results": results})
