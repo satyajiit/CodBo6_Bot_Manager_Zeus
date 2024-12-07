@@ -17,19 +17,12 @@ If you are looking for the Server app/script: [Zeus Server App Github](https://g
 > **Platform:** Cross-platform (Windows, macOS, Linux)
 
 ![Zeus COD BO6 Bot Manager Screenshot](./screenshots/1.png)
-
 ![Zeus COD BO6 Bot Manager Screenshot](./screenshots/2.png)
-
 ![Zeus COD BO6 Bot Manager Screenshot](./screenshots/3.png)
-
 ![Zeus COD BO6 Bot Manager Screenshot](./screenshots/4.png)
-
 ![Zeus COD BO6 Bot Manager Screenshot](./screenshots/5.png)
-
 ![Zeus COD BO6 Bot Manager Screenshot](./screenshots/6.png)
-
 ![Zeus COD BO6 Bot Manager Screenshot](./screenshots/7.png)
-
 ![Zeus COD BO6 Bot Manager Screenshot](./screenshots/8.png)
 
 ## Overview
