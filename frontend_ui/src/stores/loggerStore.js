@@ -21,7 +21,7 @@ export const useLoggerStore = defineStore('loggerStore', {
   },
   getters: {
     getLogs(state) {
-      return [...state.logs].sort((a, b) => b.timestamp - a.timestamp);
+      return [...state.logs];
     }
   }
 });

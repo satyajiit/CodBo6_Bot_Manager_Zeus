@@ -216,10 +216,11 @@ function getColorByStatus(status) {
       </div>
       <v-divider />
       <!-- Logs Section Scrollable -->
-      <div style="background-color: black; flex: 1; overflow-y: auto">
+      <div style="background-color: black; display: flex; flex-direction: column; flex: 1; height: 300px">
         <v-list
           ref="logList"
-          class="overflow-y-auto code-font"
+          style="overflow-y: auto; flex: 1;"
+          class="code-font"
         >
           <v-list-item
             v-for="(log, index) in logs"
@@ -240,6 +241,7 @@ function getColorByStatus(status) {
           </v-list-item>
         </v-list>
       </div>
+
     </div>
   </v-navigation-drawer>
 </template>
