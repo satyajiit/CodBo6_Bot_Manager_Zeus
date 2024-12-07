@@ -5,6 +5,13 @@ const serverStore = useServerStore();
 
 const BotManagerRepository = {
 
+  tailServerLogs(serverIp) {
+    const cmdName = '/tailLogs';
+    const requestMessage = 'Tailing logs...';
+
+    return withLogging(cmdName, requestMessage, () => axiosInstance.post(cmdName, serverIp))
+  },
+
   openUrlOnBrowser(data) {
     const cmdName = '/openUrlOnBrowser';
     const requestMessage = 'Opening URL on the browser...';
