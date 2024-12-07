@@ -8,7 +8,7 @@ from backend.utils.server_utils import fetch_server_ips, check_all_servers_healt
 
 # Define the available commands (from GamepadController)
 SUPPORTED_SERVER_COMMANDS = [
-    "open_all_chrome_profiles","install_tampermonkey_script","install_tampermonkey","start_anti_afk", "stop_anti_afk", "start_movement", "stop_movement",
+    "tail_logs", "open_all_chrome_profiles","install_tampermonkey_script","install_tampermonkey","start_anti_afk", "stop_anti_afk", "start_movement", "stop_movement",
     "press_a", "press_b", "press_x", "press_y",
     "press_lb", "press_rb", "press_lt", "press_rt",
     "press_dpad_up", "press_dpad_down", "press_dpad_left", "press_dpad_right",
@@ -174,8 +174,7 @@ def fetch_logs_from_servers():
         }
     }
     """
-    request_data = request.get_json()
-    servers, _ = do_basic_validation(request_data)
+    servers, command = do_basic_validation(request.get_json())
     results = []
     command = "tail_logs"
 
