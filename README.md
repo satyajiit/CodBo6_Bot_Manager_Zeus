@@ -16,14 +16,14 @@ If you are looking for the Server app/script: [Zeus Server App Github](https://g
 
 > **Platform:** Cross-platform (Windows, macOS, Linux)
 
-![Zeus COD BO6 Bot Manager Screenshot](./screenshots/1.png)
-![Zeus COD BO6 Bot Manager Screenshot](./screenshots/2.png)
-![Zeus COD BO6 Bot Manager Screenshot](./screenshots/3.png)
-![Zeus COD BO6 Bot Manager Screenshot](./screenshots/4.png)
-![Zeus COD BO6 Bot Manager Screenshot](./screenshots/5.png)
-![Zeus COD BO6 Bot Manager Screenshot](./screenshots/6.png)
-![Zeus COD BO6 Bot Manager Screenshot](./screenshots/7.png)
-![Zeus COD BO6 Bot Manager Screenshot](./screenshots/8.png)
+![Zeus COD BO6 Bot Manager Screenshot](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/1.png)
+![Zeus COD BO6 Bot Manager Screenshot](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/2.png)
+![Zeus COD BO6 Bot Manager Screenshot](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/3.png)
+![Zeus COD BO6 Bot Manager Screenshot](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/4.png)
+![Zeus COD BO6 Bot Manager Screenshot](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/5.png)
+![Zeus COD BO6 Bot Manager Screenshot](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/6.png)
+![Zeus COD BO6 Bot Manager Screenshot](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/7.png)
+![Zeus COD BO6 Bot Manager Screenshot](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/8.png)
 
 ## Overview
 
@@ -74,13 +74,13 @@ The UI uses Vue3 and Vuetify. During the first run, the tool intelligently check
    - Configure anti-AFK settings.
 3. Start matchmaking and manage bot lobbies with ease.
 
-![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/1.png)
-![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/2.png)
-![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/3.png)
-![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/4.png)
-![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/5.png)
-![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/6.png)
-![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/7.png)
+![Zeus COD BO6 Bot Manager Guide](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/setup/1.png)
+![Zeus COD BO6 Bot Manager Guide](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/setup/2.png)
+![Zeus COD BO6 Bot Manager Guide](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/setup/3.png)
+![Zeus COD BO6 Bot Manager Guide](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/setup/4.png)
+![Zeus COD BO6 Bot Manager Guide](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/setup/5.png)
+![Zeus COD BO6 Bot Manager Guide](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/setup/6.png)
+![Zeus COD BO6 Bot Manager Guide](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/setup/7.png)
 
 
 
