@@ -16,6 +16,25 @@ If you are looking for the Server app/script: [Zeus Server App Github](https://g
 
 > **Platform:** Cross-platform (Windows, macOS, Linux)
 
+![Code Sucks, It Works](https://forthebadge.com/images/badges/code-sucks-it-works.png)
+![Epic Games Approved](https://forthebadge.com/images/badges/epic-games-approved.png)
+![It Works, No Idea Why](https://forthebadge.com/images/badges/it-works-no-idea-why.png)
+![Made in Python](https://forthebadge.com/images/badges/made-in-python.png)
+![Works On My Machine](https://forthebadge.com/images/badges/works-on-my-machine.png)
+![Works On My Machine 1](https://forthebadge.com/images/badges/works-on-my-machine-1.png)
+![Made With JavaScript](https://forthebadge.com/images/badges/made-with-javascript.png)
+![Winter Is Coming](https://forthebadge.com/images/badges/winter-is-coming.png)
+![Powered By Oxygen](https://forthebadge.com/images/badges/powered-by-oxygen.png)
+![Powered By Black Magic](https://forthebadge.com/images/badges/powered-by-black-magic.png)
+![Made With Vue](https://forthebadge.com/images/badges/made-with-vue.png)
+![Gluten Free](https://forthebadge.com/images/badges/gluten-free.png)
+![Compatibility Betamax](https://forthebadge.com/images/badges/compatibility-betamax.png)
+![Built With Love](https://forthebadge.com/images/badges/built-with-love.png)
+![0 Percent Optimized](https://forthebadge.com/images/badges/0-percent-optimized.png)
+![Ages 18+](https://forthebadge.com/images/badges/ages-18.png)
+![Built By Developers](https://forthebadge.com/images/badges/built-by-developers.png)
+
+
 ![Zeus COD BO6 Bot Manager Screenshot](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/1.png)
 ![Zeus COD BO6 Bot Manager Screenshot](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/2.png)
 ![Zeus COD BO6 Bot Manager Screenshot](https://github.com/satyajiit/CodBo6_Bot_Manager_Zeus/raw/master/screenshots/3.png)
