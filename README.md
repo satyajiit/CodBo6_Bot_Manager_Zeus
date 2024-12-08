@@ -74,6 +74,16 @@ The UI uses Vue3 and Vuetify. During the first run, the tool intelligently check
    - Configure anti-AFK settings.
 3. Start matchmaking and manage bot lobbies with ease.
 
+![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/1.png)
+![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/2.png)
+![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/3.png)
+![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/4.png)
+![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/5.png)
+![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/6.png)
+![Zeus COD BO6 Bot Manager Guide](./screenshots/setup/7.png)
+
+
+
 ## Contributing
 ![Contributions Welcome Badge](https://img.shields.io/badge/Contributions-Welcome-brightgreen?style=flat-square&logo=github)
 
