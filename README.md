@@ -127,6 +127,8 @@ This project is inspired by [BotOps Hub Bot Lobby Tool](https://www.unknowncheat
 
 If you find this tool helpful, please star the repositories to show your support!
 
+Don't forget to subscribe to the YouTube channel for more updates and tutorials. [GamesPatch YouTube](https://www.youtube.com/@GamesPatch)
+
 ## Disclaimer
 
 This tool, **Cod Bo6 Bot Lobby Manager**, is intended for **educational and testing purposes only**. The developers of this tool do not endorse or encourage any form of unethical gameplay, account manipulation, or violation of terms of service of any game or gaming platform. 
